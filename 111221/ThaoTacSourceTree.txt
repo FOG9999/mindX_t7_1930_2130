@@ -1,0 +1,13 @@
+1. Fetch: Kéo toàn bộ lịch sử thay đôi trên các nhánh của repo về và cập nhật lịch sử commit của sourcetree
+
+2. Stash: Lưu lại thay đổi chưa được commit trên nhánh hiện tại vào máy, sẽ hiện ở Stashes sidebar bên trái. 
+Việc này nhằm mục đích tránh gây lỗi khi push code mà chưa update code trên nhánh hiện tại
+
+3. Pull: Kéo thay đổi từ remote repo về local branch
+
+4. Apply Stash: Chuột phải vào stash đã lưu, chọn Apply Stash {tên stash}, công đoạn này nhằm bổ sung code chưa được commit trên nhánh 
+của mình sau khi đã kéo (pull) code mới nhất từ remote.
+
+4b. Resolve conflict: (Hướng dẫn cụ thể trên lớp)
+
+5. Commit/Push: CHọn Commit trên góc trái trên cùng -> Stage All -> ghi commit message + push immidiately to -(tên nhánh) -> Commit
