@@ -1,0 +1,22 @@
+1. nodejs, npm
+1.1. nodejs
+- môi trường thực thi code js, dựa trên engine V8 của trình duyệt, giúp chạy code JS trên chính máy local như một ứng dụng riêng biệt.
+- bình thưởng khi mình có một file html, 1 file js mình cần import file js vào html, sau đó load trang html lên bằng trình duyệt. Khi đó engine V8 sẽ đọc và thực thi code JS trên trình duyệt.
+- Bây giờ với nodejs ta không cần sử dụng trình duyệt, vẫn có thể thực thi code js, trên chính máy local của lập trình viên. Từ đó, JS có thể phát triển thành một  ngôn ngữu Backend. Khi ta làm việc với các file html và js hiện tại chỉ là đang làm Frontend. FE cần giao tiếp với BE và kho cơ sở dữ liệu (Database) để linh động thao tác với các thao tác của người dùng và giảm thiểu công việc cho trình duyệt.
+- Link download: https://nodejs.org/en/
+- Sau khi download, chạy file install -> máy tính đã hoàn toàn có môi trường nodejs và có thể chạy đc file js bằng câu lệnh: node <tên file hoặc đường dẫn tới file>
+- Kiểm tra version node hiện tại: node --version
+
+1.2. npm
+- npm - Node Package Manager: kho thư viện mã nguồn mở cho các ứng dụng ndoejs
+- Khi phát triển website, ta sẽ cần các thư viện hỗ trợ. Bootstrap là 1 ví dụ, được cài trên trang web qua đường dẫn CDN. Ngoài ra đối với các framework, Bootstrap có phát triển riêng các thư viện đặc dụng cho từng loại, có react-bootstrap, angular-bootstrap, vue-bootstrap. 
+- Npm cũng là 1 thư viện, được đính kèm cùng nodejs, do đó khi cài đặt nodejs, npm đã có sẵn.
+- Kiểm tra version: npm --version
+- Cài đặt 1 thư viện: npm install <tên thư viện> (hay ngắn gọn npm i <tên thư viện>)
+- Xóa thư viện khỏi project: npm uninstall <tên thư viện>
+
+
+2. SPA (Single Page App)
+- Đối với các trang web thế hệ cũ: Khi thao tác với trang web và một số thành phần trên trang cần thay đổi -> trình duyệt sẽ cần load lại nguyên một trang html mới, với rất nhiều thành phần giống với trang trước đó (bao gồm cả css), chỉ khác một chút nhưng vãn phải tạo một trang html mới. Việc này là k cần thiết.
+- SPA: trong lần load web lần đầu tiên, SPA sẽ load 1 trang html và các tài nguyên ít thay đổi khác như css, các thư viện cố định. Từ những lần load sau, SPA sử dụng JS để lấy chỉ những dữ liệu cần thiết (các object) để thay đổi nội dung trang web, sau đó lựa chọn những phần (tag html) cần thay đổi để thay, phần còn lại giữ nguyên. 2 điều này sẽ giúp tốc độ duyệt web cao hơn. 
+VD: Hãy tưởng tượng Facebook (viết bằng React), mỗi khi lướt đến cuối bảng tin, nó cần load các bài viết mới, nó sẽ giữ lại các bài viết phía trên thay vì load lại cả trang.
