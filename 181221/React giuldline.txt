@@ -1,0 +1,5 @@
+1. ReactJS
+- Là một thư viện hoặc một framework JS dùng để xây dựng giao diện người dùng trong phát triển web, được FB phát triển năm 2013.
+- Nguyên lý hoạt động:
++ Sử dụng DOM ảo để phát hiện sự thay đổi trên cây HTML -> thay thế những thành phần thay đổi và giữ nguyên các thành phần k thay đổi để tăng trải ngiệm web.
++ 
