@@ -27,6 +27,12 @@ function convertToFraction(str) {
     return f;
 }
 
+function convertToString(fraction) {
+    try {
+        return `${fraction.numerator}/${fraction.denominator}`;
+    } catch (e) {}
+}
+
 function reduceFraction(a) {
     let commonGcd = gcd(a.numerator, a.denominator);
     a.numerator /= commonGcd;
@@ -74,14 +80,16 @@ function operator(fraction1, fraction2, operation) {
 }
 
 var answerPanel = document.getElementById('answer-panel');
-a = new PhanSo(4, 14);
-b = new PhanSo(3, 5);
-let answer = new PhanSo(0, 1);
+a = prompt(`Please enter a fraction. The number should be in the form a/b. E.g: 2/5.`);
+b = prompt(`Please enter a fraction. The number should be in the form a/b. E.g: 2/5.`);
+a = convertToFraction(a);
+b = convertToFraction(b);
+let answer = new PhanSo();
 answer = operator(a, b, "+");
-console.log(answer);
+answerPanel.innerHTML += `${convertToString(a)} + ${convertToString(b)} = ${convertToString(answer)}.<br>`;
 answer = operator(a, b, "-");
-console.log(answer);
+answerPanel.innerHTML += `${convertToString(a)} - ${convertToString(b)} = ${convertToString(answer)}.<br>`;
 answer = operator(a, b, "*");
-console.log(answer);
+answerPanel.innerHTML += `${convertToString(a)} * ${convertToString(b)} = ${convertToString(answer)}.<br>`;
 answer = operator(a, b, "/");
-console.log(answer);
+answerPanel.innerHTML += `${convertToString(a)} / ${convertToString(b)} = ${convertToString(answer)}.<br>`;
