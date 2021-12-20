@@ -1,5 +1,34 @@
-1. ReactJS
+1. Giới thiệu ReactJS
 - Là một thư viện hoặc một framework JS dùng để xây dựng giao diện người dùng trong phát triển web, được FB phát triển năm 2013.
 - Nguyên lý hoạt động:
-+ Sử dụng DOM ảo để phát hiện sự thay đổi trên cây HTML -> thay thế những thành phần thay đổi và giữ nguyên các thành phần k thay đổi để tăng trải ngiệm web.
-+ 
++ Sử dụng cây HTML ảo để phát hiện sự thay đổi trên cây HTML -> thay thế những thành phần thay đổi và giữ nguyên các thành phần k thay đổi để tăng trải ngiệm web.
++ Cây HTML ảo (DOM ảo): là một cây phản ánh kiến trúc của trang HTML dưới dạng "cây" đơn giản hơn, khi React phát hiện sự thay đổi nó sẽ báo cho DOM ảo để cập nhật trạng thái (state) mới, từ đó DOM sẽ thay thế những nơi cân thiết.
+
+2. Tạo 1 project React
+- Cài đặt môi trường Nodejs
+- Nhấn Windows + R -> Gõ cmd (Mở command Prompt) -> Gõ "node --version" để kiểm tra xem node đã được cài đặt với phiên bản nào
+- tiếp tục trên cmd -> Gõ "npm i -g create-react-app"
+NOTE: npm i (npm install) ----> cài đặt 1 package trên npm
+      -g    (global)      ----> cài đặt trên toàn máy tính hiện tại
+      create-react-app    ----> một tool để generate auto 1 project react
+- tiếp tục cmd -> "create-react-app my-app" để tạo 1 project React với tên my-app
+NOTE: Quá trình sinh code sẽ phải đợi 1 lúc nên cmd sẽ đứng 1 tgian
+
+3. Cấu trúc thư mục trên project mẫu
+
+- index.html: Nơi tình yêu bắt đầu
++ đây là file xuất phát điểm: chú ý tới div#root đây sẽ là div luôn luôn có trên project và sẽ render toàn bộ những component (class) bên trong của chúng ta.
+
+- index.js: 
++ function render của ReactDOM sẽ lấy div#root và render App component
+
+- App.js và các file .js trong folder src/components:
++ đây là các class js, mỗi class có 1 function render() đc inherit từ component React.Component
++ function này trả về 1 đoạn html, tất cả các class (comp) đều trả về 1 đoạn html trong render(), hoặc trả về các comp con (App.js)
+
+- <Routes></Routes>: chứa các url trỏ tới từng comp từ đó render ra nội dung html của comp đó thông qua các comp <Route> với path là url, element là comp
+
+4. How to run
+- Mở terminal gõ npm start ---> tự động mở trình duyệt và vào trang localhost:3000
+
+5. Chi tiết về React a sẽ giảng vào buổi sau.
