@@ -1,4 +1,4 @@
-﻿1. Giới thiệu ReactJS
+1. Giới thiệu ReactJS
 - Là một thư viện hoặc một framework JS dùng để xây dựng giao diện người dùng trong phát triển web, được FB phát triển năm 2013.
 - Nguyên lý hoạt động:
 + Sử dụng cây HTML ảo để phát hiện sự thay đổi trên cây HTML -> thay thế những thành phần thay đổi và giữ nguyên các thành phần k thay đổi để tăng trải ngiệm web.
@@ -32,4 +32,3 @@ NOTE: Quá trình sinh code sẽ phải đợi 1 lúc nên cmd sẽ đứng 1 tg
 - Mở terminal gõ npm start ---> tự động mở trình duyệt và vào trang localhost:3000
 
 5. Chi tiết về React a sẽ giảng vào buổi sau.
- 
