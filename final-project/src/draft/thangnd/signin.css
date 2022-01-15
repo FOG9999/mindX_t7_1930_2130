@@ -1,5 +1,4 @@
 .login-wrapper {
-  height: 400px;
   background-color: white;
   border-radius: 5px;
   padding: 20px;
@@ -23,14 +22,14 @@
   font-weight: 500;
 }
 
-.forgot-link {
+.link {
   text-decoration: none;
   color: black;
   font-weight: 600;
   font-size: small;
 }
 
-.forgot-link:hover {
+.link:hover {
   color: purple;
   text-decoration: none;
 }
