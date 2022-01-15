@@ -1,0 +1,47 @@
+.login-wrapper {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  min-width: 400px;
+}
+
+.main {
+  min-height: 100vh;
+  background-image: url("./background-login.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  padding: 10px;
+  text-align: center;
+}
+
+.label-input {
+  font-weight: 500;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: small;
+}
+
+.link:hover {
+  color: purple;
+  text-decoration: none;
+}
+
+.button-login {
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+}
+
+.button-login:hover {
+  cursor: pointer;
+}
