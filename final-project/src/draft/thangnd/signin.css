@@ -45,3 +45,10 @@
 .button-login:hover {
   cursor: pointer;
 }
+
+.prepend {
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  background-color: darkgrey;
+}
