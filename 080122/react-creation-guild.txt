@@ -1,0 +1,47 @@
+Hướng dẫn các bước tạo một 1 project reactjs từ create-react-app
+1. Requirement:
+- Môi trường Nodejs: để sử dụng npm và Nodejs. Check:
++ (Windows + R) -> (Gõ cmd) -> node --version (check version node) -> văng lỗi là chưa có node. Cài đặt trên nodejs.org
+- VS code: Download search gg :)
+2. Các bướ:
+- npm i -g create-react-app: Cài đặt create-react-app globally, trên toàn máy local của mình, để chỉ cần chạy câu lệnh này 1 lần duy nhất
+- npx create-react-app <tên-app>: Đứng ở folder muốn tạo project, run câu lệnh này, create-react-app sẽ sinh ra các file và folder cần thiết
+- Xóa .git folder: CRA (create-react-app) sẽ tạo default 1 thư mục .git với repo k mong muốn. Nếu muốn push lên repo của mình thì xóa .git.
+Đây là folder ẩn. Chọn View -> Hidden để show các foler ẩn.
+- Luồng chạy: index.html (div với id 'root') -> index.js (query selector div với id 'root') -> App.js (routing tới các component) -> các component
+- Cài đặt các thư viện routing: npm i react-router react-router-dom
+- Sửa index.js:
+
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom"; 
+
+ReactDOM.render(
+  <BrowserRouter> 
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
+
+- Sửa App.js:
+
+import "./App.css";
+import { Routes } from "react-router";
+import { Route } from "react-router";
+import LandingPage from "./components/LandingPage";
+import Summary from "./components/Summary";
+
+function App() {
+  return (
+    <Routes>
+      <Route element={<LandingPage />} path="/" />
+      <Route element={<Summary />} path="/summary" />
+    </Routes>
+  );
+}
+
+- tạo folder src/components -> tạo các component cần thiết để các path trong thẻ Route trỏ tới tương ứng các url
+- cập nhật lại App.js theo các components vừa tạo.

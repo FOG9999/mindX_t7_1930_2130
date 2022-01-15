@@ -1,0 +1,110 @@
+1. State COmponent Props trong ReactJS
+SPA: single page application, k load lại cả trang html khi thay đổi trên 1 nhất 1 thành phần, mà nó sẽ check xem thành phần naafo thay đổi 
+thì sẽ render lại (re-render) chỉ thành phần đó, những thành phân khác giữu nguyên
+
+ReactJS:
+- state: sử dụng local trong 1 COmponent
+- props: để share state giữa các COmponent
+
+- state: nếu ở trong 1 compoent, state có thể bị thay đổi
+- props: read only
+VD:
+class Parent extends Component {
+
+	// chi co the su dung trong class Parent
+	state = {
+		username: 'Parent'
+	}
+
+	render(){
+		return (
+			<div>
+				// truy cap state
+				<div>This is username in compoent Parent: {this.state.username}</div>
+				// chia se state giua cac coomponent
+				<Child username={this.state.username} />
+			</div>
+		)
+	}
+}
+
+class Child extends Component {
+	render(){
+		// truy cap props, object read only, k the viet: this.props.username = 'newUsername'
+		return (<div>This is username in child component: {this.props.username}</div>) 
+	}
+}
+
+2. Method trong ReactJS
+ Co 2 cach de khai bao method trong ReactJS: pure function and arrow function
+ VD:
+ class ... extends ... {
+ 
+	constructor(props){
+		// extends nen phai call super()
+		super(props);
+		
+		// bind pure function vao component, neu khong se gap loi 'Cannot read property changeStateBeta of undefined', vi this luc nay la undefined
+		this.changeStateBeta = this.changeStateBeta.bind(this)
+	}
+	
+	state = {...}
+	
+	// arrow function
+	changeState = () => {
+		// thay doi cac thuoc tinh cua object state thong qua ham this.setState.
+		this.setState({
+			username: 'newUsername'
+		})
+	}
+	
+	// pure function, require khai bao constructor
+	changeStateBeta(){
+		this.setState({
+			username: 'newUsername'
+		})
+	}
+	
+	render(){...}
+	
+ }
+ 
+ NOTE: Nhac lai su khac nhau cua arrow va pure function
+ VD:
+ class A {
+	  username = "AAA";
+
+	  changeUsername = (newUsername) => {
+		console.log("Username before change: " + this.username);
+		this.username = newUsername;
+		console.log("Username after change: " + this.username);
+	  };
+
+	  changeUsernameBeta(newUsername) {
+		console.log("Username before change: " + this.username);
+		this.username = newUsername;
+		console.log("Username after change: " + this.username);
+	  }
+  }
+
+	class B {
+	  constructor(func) {
+		this.changeUsername = func;
+	  }
+	}
+
+	let a = new A();
+	let b = new B(a.changeUsernameBeta);
+	b.changeUsername("BBB");
+	console.log(a.username);
+	
+- Trong ví dụ này, ta có class A có 2 fucntion, 1 pure, 1 arrow. Class B có constructor khởi tạo nhận 1 function bất kỳ để gán function changeUsername
+của nó.
+- Nếu constructor của B nhận vào changeUsername (arrow fucntion), lúc này 'this' được sử dụng trong changeUsername của b.changeUsername sẽ trỏ tới thằng a của class
+A. Nó sẽ update property username của a thay vì update prop username của b.
+- Nếu constructor của B nhận changeStateBeta (pure function), lúc này từ khóa 'this' sử dụng trong changeUsername của b sẽ chính là b.
+Nó sẽ đọc b.username (ban đầu la undefined), set giá trị mới cho b.username. a.username k hề thay đổi.
+==> SỰ KHÁC NHAU KHI SỬ DỤNG ARROW VÀ PURE = NGỮ CẢNH THAY ĐỔI DẪN ĐẾN TỪ KHÓA 'THIS' TRỎ TỚI CÁC CLASS KHÁC NHAU.
+==> ARROW: THIS TRỎ TỚI THẰNG NÀO ĐÃ KHAI BÁO HÀM CHO NÓ (THẰNG A ĐÃ KHAI BÁO HÀM CHO CHANGEUSERNAME, NÊN MÃI MÃI THIS TRONG CHANGEUSERNAME SẼ TRỎ TỚI a (1 instance của A))
+==> PURE: THIS TRỎ TỚI THẰNG NÀO ĐANG CALL NÓ (MẶC DÙ A KHAI BÁO CHANGEUSERNAMEBETA NHƯNG B CALL, NÊN THIS LÚC NÀY TRỎ TỚI b)
+==> chính vì lí do này, ta luôn phải bind pure function vào this, để function đó luôn trỏ tới component hiện tại.
