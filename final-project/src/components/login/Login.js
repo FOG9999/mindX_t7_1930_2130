@@ -32,6 +32,26 @@ class Login extends Component {
       this.setState({
         loggedIn: true,
       });
+
+      // validate done
+      fetch("localhost:5000/login", {
+        method: "POST", // GET
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          // POST, PUT, DELETE
+          username: this.state.username,
+          passwod: this.state.password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data); // {msg: 'update successfully'}
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
 
