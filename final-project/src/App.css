@@ -7,8 +7,6 @@
   pointer-events: none;
 }
 
-
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -104,12 +102,13 @@
   object-fit: cover;
 }
 
-.whole-container{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+.whole-container {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .info-div {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-radius: 8px;
 }
 
@@ -119,19 +118,25 @@
   border-radius: 25px;
 }
 
+.card-container:hover {
+  transform: scale(1.3);
+  transition: 0.3s;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
 
 .cardWrapper:hover {
-  transform: scale(1.1);
-  transition:.3s;
-
+  z-index: 1000;
 }
 
 .cardWrapper {
-  z-index: 1;
-
+  /* z-index: 1; */
+  position: relative;
 }
 
-.compareButton, .purchaseButton{
+.compareButton,
+.purchaseButton {
   display: none;
 }
-
