@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Header from '../share/header';
 
 class HomePage extends Component {
     state = {  } 
     render() { 
         return (
-            <div>Welcome Snavy!</div>
+            <div><Header /></div>
         );
     }
 }
