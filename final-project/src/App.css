@@ -7,6 +7,8 @@
   pointer-events: none;
 }
 
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -32,6 +34,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -94,3 +97,41 @@
   align-items: center;
   background-color: darkgrey;
 }
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+.whole-container{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.info-div {
+  background-color: #F7F7F7;
+  border-radius: 8px;
+}
+
+.payment-method {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+
+.cardWrapper:hover {
+  transform: scale(1.1);
+  transition:.3s;
+
+}
+
+.cardWrapper {
+  z-index: 1;
+
+}
+
+.compareButton, .purchaseButton{
+  display: none;
+}
+
