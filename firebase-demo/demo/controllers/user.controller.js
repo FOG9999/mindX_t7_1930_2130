@@ -7,7 +7,7 @@ module.exports = {
       const batch = db.batch();
       fakeUsers.forEach((user) => {
         const userRef = db.collection("users").doc();
-        batch.create(userRef, user);
+        batch.create(userRef, user); // tạo ra 1 câu lệnh write vào collection users
       });
       const res = await batch.commit();
       done(res);

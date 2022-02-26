@@ -12,6 +12,7 @@ const { initPassport } = require("./passport");
 const session = require("express-session");
 const passport = require("passport");
 const { authenticateRequest } = require("./middlewares/auth.middleware");
+const productRouter = require("./routes/product.route");
 
 var app = express();
 
@@ -66,6 +67,8 @@ app.use(
   passport.authenticate("local", { failureRedirect: "/" }),
   usersRouter
 );
+
+app.use("/product", productRouter);
 
 app.post(
   "/api/auth/login",
