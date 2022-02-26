@@ -26,7 +26,7 @@ class Listings extends Component {
     return product_card.map((item, index) =>
 
   <div className="col-sm-6 col-md-3 cardWrapper">
-    <div className="card card-container mt-3">
+    <div className="card card-container mt-5">
         <img src={item.image} alt="" className="card-img-top img-fluid"/>
         <div className="card-body">
             <h5 className="card=title">{item.product}</h5>
