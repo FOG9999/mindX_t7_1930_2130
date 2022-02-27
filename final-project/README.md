@@ -1,18 +1,17 @@
 # Code Flow ReactJS trong project
-* Cấu trúc các file và thư mục
-** index.html
+## index.html
 Chứa thành phần div#root sẽ render toàn bộ project. Nếu có các thư viện như bootstrap với link cdn, thì có thể import trong file này trong thẻ <link />
-** index.js
+## index.js
 Query select div#root trong index.html, nhét các component vào làm con của div này.
 Thẻ <BrowserRouter> (react-router-dom) phải bao lấy <App/> vì trong App chưa các Route trỏ tới các trang (component) ứng với từng path
-** App.js
+## App.js
 Chứa các <Route path="/..." element={<Component />} />
 Lưu ý: 
 - Phải bọc các <Route> bằng <Routes>
 - Đối với react-router version <=5, thuộc tính 'element' chuyển thành 'component'
-** components
+## components
 Chứa các component cho từng trang, hoặc từng thành phần trong 1 trang. Thường mỗi trang sẽ là 1 folder, folder đó bao gồm các component con của 1 component cha (container), ví dụ: folder /components/cart
-** apis
+## apis
 CHứa các file trong đó mỗi file bao gồm các hàm fetch.
 Hàm này là hàm dùng để giao tiếp với Backend
 ví dụ: AuthService.js
@@ -32,7 +31,7 @@ login: (username, password, done) => {
         handleResponseWrapper(responseWrapper, done);
       });
   }
-** utils
+## utils
 /utils/Responsehander.js:
 - class ResponseWrapper: lấy các thông tin quan trọng của response (headers, data trả về, status code), viết chung để sử dụng cho tất cả các api. Người sau viết chỉ cần copy paste phần .then(...).then(...):
 export class ResponseWrapper {
