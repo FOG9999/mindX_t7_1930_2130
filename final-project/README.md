@@ -14,9 +14,9 @@ Chứa các component cho từng trang, hoặc từng thành phần trong 1 tran
 ## apis
 CHứa các file trong đó mỗi file bao gồm các hàm fetch.
 Hàm này là hàm dùng để giao tiếp với Backend
-ví dụ: AuthService.js
-login: (username, password, done) => {
-    fetch(constants.SERVER_API_URL + "api/auth/login", {  // SERVER_API_URL='http://localhost:5000/' -> đường dẫn cơ bản tới Backend (BE), lưu trong 													  // constants.js
+- ví dụ: AuthService.js
+- login: (username, password, done) => {
+    fetch(constants.SERVER_API_URL + "api/auth/login", {  // SERVER_API_URL='http://localhost:5000/' -> đường dẫn cơ bản tới Backend (BE), lưu trong constants.js
       method: "POST",									  // request method: POST
       headers: {										  // các thông tin gán vào header (bao gồm cả authen thẻ định danh)
         "Content-type": "application/json",  			  
@@ -34,7 +34,7 @@ login: (username, password, done) => {
 ## utils
 /utils/Responsehander.js:
 - class ResponseWrapper: lấy các thông tin quan trọng của response (headers, data trả về, status code), viết chung để sử dụng cho tất cả các api. Người sau viết chỉ cần copy paste phần .then(...).then(...):
-export class ResponseWrapper {
+- export class ResponseWrapper {
   headers;
   data;
   status;
@@ -45,7 +45,7 @@ export class ResponseWrapper {
   }
 }
 - function handleResponseWrapper: nhận instance của class ResponseWrapper, trả về data nếu mã lỗi = 200 (OK), nếu khác thì văng ra message
-export function handleResponseWrapper(responseWrapper, done) {
+- export function handleResponseWrapper(responseWrapper, done) {
   if (responseWrapper.status === 200) {
     done(responseWrapper.data);
   } else if (responseWrapper.status === 401) {
