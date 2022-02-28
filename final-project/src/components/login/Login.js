@@ -3,12 +3,15 @@ import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { authService } from "../../apis/AuthService";
+import { Spin, notification } from "antd";
 
 class Login extends Component {
   state = {
     username: "",
     password: "",
     loggedIn: false,
+    loading: false,
   };
 
   onChangeUsername = (evnt) => {
@@ -20,39 +23,30 @@ class Login extends Component {
   };
 
   submit = () => {
-    let fakeUser = JSON.parse(localStorage.getItem("fakeUser"));
-    if (this.state.username !== fakeUser.username) {
-      toast("Username does not exist!");
-    } else if (
-      this.state.username === fakeUser.username &&
-      this.state.password !== fakeUser.password
-    ) {
-      toast("Password inputed is wrong!");
-    } else {
-      this.setState({
-        loggedIn: true,
-      });
-
-      // validate done
-      fetch("localhost:5000/login", {
-        method: "POST", // GET
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          // POST, PUT, DELETE
-          username: this.state.username,
-          passwod: this.state.password,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data); // {msg: 'update successfully'}
-        })
-        .catch((err) => {
-          console.error(err);
+    // let fakeUser = JSON.parse(localStorage.getItem("fakeUser"));
+    // if (this.state.username !== fakeUser.username) {
+    //   toast("Username does not exist!");
+    // } else if (
+    //   this.state.username === fakeUser.username &&
+    //   this.state.password !== fakeUser.password
+    // ) {
+    //   toast("Password inputed is wrong!");
+    // } else {
+    this.setState({
+      losding: true,
+    });
+    const { username, password } = this.state;
+    authService.login(username, password, (res) => {
+      if (res.error) {
+        notification.error(res.errorMessage);
+      } else {
+        this.setState({
+          loggedIn: true,
+          loading: false,
         });
-    }
+      }
+    });
+    // }
   };
 
   componentDidMount() {
@@ -66,6 +60,7 @@ class Login extends Component {
     return (
       <div className="container-fluid main d-flex justify-content-center align-items-center">
         <ToastContainer />
+        <Spin spinning={this.state.loading} />
         {this.state.loggedIn ? <Navigate to="/home-page" /> : null}
         <div className="login-wrapper">
           <div className="header">

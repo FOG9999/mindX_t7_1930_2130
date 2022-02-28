@@ -1,70 +1,63 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Code Flow ReactJS trong project
+## index.html
+Chứa thành phần div#root sẽ render toàn bộ project. Nếu có các thư viện như bootstrap với link cdn, thì có thể import trong file này trong thẻ <link />
+## index.js
+Query select div#root trong index.html, nhét các component vào làm con của div này.
+Thẻ <BrowserRouter> (react-router-dom) phải bao lấy <App/> vì trong App chưa các Route trỏ tới các trang (component) ứng với từng path
+## App.js
+Chứa các <Route path="/..." element={<Component />} />
+Lưu ý: 
+- Phải bọc các <Route> bằng <Routes>
+- Đối với react-router version <=5, thuộc tính 'element' chuyển thành 'component'
+## components
+Chứa các component cho từng trang, hoặc từng thành phần trong 1 trang. Thường mỗi trang sẽ là 1 folder, folder đó bao gồm các component con của 1 component cha (container), ví dụ: folder /components/cart
+## apis
+CHứa các file trong đó mỗi file bao gồm các hàm fetch.
+Hàm này là hàm dùng để giao tiếp với Backend
+- ví dụ: AuthService.js
+- login: (username, password, done) => {
+    fetch(constants.SERVER_API_URL + "api/auth/login", {  // SERVER_API_URL='http://localhost:5000/' -> đường dẫn cơ bản tới Backend (BE), lưu trong constants.js
+      method: "POST",									  // request method: POST
+      headers: {										  // các thông tin gán vào header (bao gồm cả authen thẻ định danh)
+        "Content-type": "application/json",  			  
+      },
+      credentials: "include", 							  // su dung cookie (F12 cùng hàng với tab console, tab Application->Cookies), một loại thẻ định danh
+      body: JSON.stringify({ username, password }),       // thông tin muốn gửi đến BE
+    })
+      .then((res) => {
+        return new ResponseWrapper(res.headers, res.json(), res.status);
+      })
+      .then((responseWrapper) => {
+        handleResponseWrapper(responseWrapper, done);
+      });
+  }
+## utils
+/utils/Responsehander.js:
+- class ResponseWrapper: lấy các thông tin quan trọng của response (headers, data trả về, status code), viết chung để sử dụng cho tất cả các api. Người sau viết chỉ cần copy paste phần .then(...).then(...):
+- export class ResponseWrapper {
+  headers;
+  data;
+  status;
+  constructor(headers, data, status) {
+    this.headers = headers;
+    this.data = data;
+    this.status = status;
+  }
+}
+- function handleResponseWrapper: nhận instance của class ResponseWrapper, trả về data nếu mã lỗi = 200 (OK), nếu khác thì văng ra message
+- export function handleResponseWrapper(responseWrapper, done) {
+  if (responseWrapper.status === 200) {
+    done(responseWrapper.data);
+  } else if (responseWrapper.status === 401) {
+    done({
+      error: true,
+      errorMessage: "Không thể xác thực người dùng",
+    });
+  } else {
+    done({
+      error: true,
+      errorMessage: "Có lỗi xảy ra",
+    });
+  }
+}
+- Ngoài ra có thể tạo ra các file chứa các hàm tiện tích dùng chung cho cả project: hàm biến đổi object Date -> string, các hàm để validate,...
