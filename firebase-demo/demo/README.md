@@ -35,8 +35,18 @@ Tại file này mình export cái db sau khi connect thành công ra để sử 
 ### passport
 
 - Công cụ để xác thực người dùng trong project nodejs
--
+- Quy trình xử lý của passport với LocalStrategy: (đối với các Strategy khác có thể nghiên cứu ở link: https://www.passportjs.org/packages/)
+  `*` LocalStrategy: login với username và password. một số strategy khác có thể sử dụng đến là login bằng tài khoản facebook, twitter,...
+  `*` User gửi usename/password -> endpoint
+  gọi passport.authenticate('local', {failureRedirect: '/'}): khi một endpoint có gọi hàm này thì sẽ xác minh người dùng, nếu không, endpoint đó sẽ không được bảo vệ và có thể call từ những user chưa login
+  `*` Nếu request user gửi lên chưa tồn tại sessionId, trong cookies, (mỗi khi login, user tạo 1 cái gọi là session, và có 1 cái Id), thì sẽ dùng username và password để tạo session mới, lưu lại vào session-storage (ở đây là express-session package của npm).
+  `*` Nếu request gửi lên có sessionId trong cookie thì sẽ đọc id đó (bởi passport.serialize), truy vấn database(DB) để xác thực người dùng với Id đó (passport.deserialize)
 
-### cors
+### endpoints (API)
 
-### endpoints
+- Ví dụ: POST http://localhost:5000/api/auth/login: là một endpoint, sử dụng POST method. Tại project này, ta chia endpoint thành các phần riêng để tránh trường hợp ghi toàn bộ endpoint vào cùng app.js, hay giảm lượt call các hàm trùng nhau với những API có phần giống nhau:
+  `*` Ví dụ những API bắt đầu bằng http://..../users: những api này thường lấy thông tin người dùng hoặc update hay xóa người dùng, vì thế luôn cần phải xác thực request
+  `*` Việc gộp các endpoint có điểm chung lại vừa giảm code, vừa dễ maintain cho developer.
+- Các bước tạo 1 api mới: ví dụ /user/update và /product/update
+  `*` Tìm kiếm xem dã có app.use('/user',...) chưa. Đây là cách để framework express phân tầng API như đã nói ở trên. Nếu đã có (/user/update) thì thêm vào file /routes/user.js theo cấu trúc như đã comment ở users.js. Nếu chưa có, tạo file có cấu trúc tương tự.
+  `*` Update các file .controller hoặc trong folder /controllers với cấu trúc tượng tự những hàm có sẵn.

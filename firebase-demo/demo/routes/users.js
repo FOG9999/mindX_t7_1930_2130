@@ -7,4 +7,12 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
+/**
+ * với req: request được gửi từ user
+ * res: cái sẽ trả về cho user
+ * router.get("/", function (req, res, next) {
+    xử lý logic sử dụng các .controller file
+  });
+ */
+
 module.exports = router;
