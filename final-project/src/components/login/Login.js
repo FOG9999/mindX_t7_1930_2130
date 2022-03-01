@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router";
-<<<<<<< HEAD
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
- 
-=======
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authService } from "../../apis/AuthService";
 import { Spin, notification } from "antd";
 
->>>>>>> feature/thangnd
 class Login extends Component {
   state = {
     username: "",
@@ -51,18 +45,9 @@ class Login extends Component {
           loading: false,
         });
       }
-<<<<<<< HEAD
-      else {
-        this.setState({
-          loggedIn: true
-        })
-      }
-  }
-=======
     });
     // }
   };
->>>>>>> feature/thangnd
 
 
   componentDidMount() {
@@ -75,14 +60,9 @@ class Login extends Component {
   render() {
     return (
       <div className="container-fluid main d-flex justify-content-center align-items-center">
-<<<<<<< HEAD
-        <ToastContainer /> 
-        {this.state.loggedIn?<Navigate to="/listings" />: null}
-=======
         <ToastContainer />
         <Spin spinning={this.state.loading} />
         {this.state.loggedIn ? <Navigate to="/home-page" /> : null}
->>>>>>> feature/thangnd
         <div className="login-wrapper">
           <div className="header">
             <h4 style={{ fontWeight: 700 }}>Login</h4>
@@ -127,11 +107,7 @@ class Login extends Component {
           </div>
           <div className="text-center mt-5">
             <span style={{ fontWeight: 600 }}>
-<<<<<<< HEAD
-              Don't have an account? <a href="/sign-up">Sign up</a>
-=======
               Don't have an account? <Link to="/sign-up">Sign up</Link>
->>>>>>> feature/thangnd
             </span>
           </div>
         </div>

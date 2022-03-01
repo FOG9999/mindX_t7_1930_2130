@@ -96,7 +96,6 @@
   background-color: darkgrey;
 }
 
-<<<<<<< HEAD
 .card-img-top {
   width: 100%;
   height: 15vw;
@@ -133,18 +132,17 @@
 
 .cardWrapper:hover {
   z-index: 1000;
+  transition: .5s ease;
+  transform: scale(1.1);
 }
 
 .cardWrapper {
   /* z-index: 1; */
   position: relative;
+  transition: .5s ease;
 }
 
-.compareButton,
-.purchaseButton {
-  display: none;
-}
-=======
+
 /* Cart */
 .product {
   display: flex;
@@ -166,4 +164,3 @@
   display: inline-block;
   vertical-align: top;
 }
->>>>>>> feature/thangnd

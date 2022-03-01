@@ -5,27 +5,38 @@ import ip11 from './ip11.png'
 import ip12 from './ip12.png'
 import ip13 from './ip13.png'
 
-let cardWrapper = document.getElementsByClassName("cardWrapper")
 
 class Listings extends Component {
-  state = {}
-  
+  state = {
+    displayBtns: []
+  }
 
-  displayBlock = () => {
-    document.getElementsByClassName('purchaseButton').style.display = 'block'
-    document.getElementsByClassName('compareButton').style.display = 'block'
+  componentDidMount() {
+    const displayButton = [];
+    product_card.map(value => {
+      displayButton.push('none');
+    })
+    this.setState({displayBtns: displayButton});
   }
   
-  // toggleDisplayBtn = () => {
-  //   cardWrapper.addEventListener("mouseover", displayBlock())
-  // }
+  onMouseOver = (index) => {
+    const displayBtns = this.state.displayBtns;
+    displayBtns[index] = 'block';
+    this.setState({displayBtns: displayBtns});
+  }
+
+  onMouseOut = (index) => {
+    const displayBtns = this.state.displayBtns;
+    displayBtns[index] = 'none';
+    this.setState({displayBtns: displayBtns});
+  }
 
   logOutConsole = () => console.log(product_card)
 
   renderBlock = () => {
     return product_card.map((item, index) =>
 
-  <div className="col-sm-6 col-md-3 cardWrapper">
+  <div className="col-sm-6 col-md-3 cardWrapper" onMouseOver={() => this.onMouseOver(index)} onMouseOut={() => this.onMouseOut(index)}>
     <div className="card card-container mt-5">
         <img src={item.image} alt="" className="card-img-top img-fluid"/>
         <div className="card-body">
@@ -39,8 +50,8 @@ class Listings extends Component {
                 <a href={"/"}> <img src={item.paymentmethod1} className="payment-method" /></a>
             </div>
             <div className="btn-wrapper d-flex flex-col">
-                  <a href="" className="purchaseButton btn btn-danger fw-bolder text-nowrap">Mua ngay</a>
-                  <a href="" className="compareButton btn btn-secondary fw-bolder text-nowrap ">So sánh</a>
+                  <a href="" className="purchaseButton btn btn-danger fw-bolder text-nowrap" style={{display: this.state.displayBtns[index]}}>Mua ngay</a>
+                  <a href="" className="compareButton btn btn-secondary fw-bolder text-nowrap" style={{display: this.state.displayBtns[index]}}>So sánh</a>
             </div>
         </div>
     </div>
