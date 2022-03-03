@@ -1,3 +1,5 @@
+const userController = require("./controllers/user.controller");
+
 const LocalStrategy = require("passport-local").Strategy;
 
 module.exports = {
@@ -5,34 +7,26 @@ module.exports = {
     // nhận username và password khi request gửi lên k có sessionId
     passport.use(
       new LocalStrategy((username, password, done) => {
-        console.log("authenticating...");
-        if (username === "xxx" && password === "xxx") {
-          console.log("user verified");
-          // nếu authen thành công thì lưu user vào session storage,
-          // thực ra thông tin quan trọng nhất vẫn là userId
-          done(null, { id: 1, name: "Demo User" });
-        } else {
-          // nếu fail thì return null (k có lỗi), false (authen fail)
-          console.log("user not authenticated");
-          done(null, false);
-        }
+        userController.authenticateUser(username, password, (data) => {
+          if (data.error) {
+            // nếu fail thì trả về false, passport sẽ hiểu là authen fail
+            done(null, false);
+          } else {
+            // nếu thành công thì lưu lại để hàm serialize sau sử dụng
+            done(null, data);
+          }
+        });
       })
     );
 
     // nhận id từ serialize và truy vấn database với id đó để xác thực user
     passport.deserializeUser((id, done) => {
       console.log("deserializing...");
-      if (id === 1) {
-        console.log("deserialize success");
-        done(null, {
-          username: "xxx",
-          password: "xxx",
-          name: "Demo User",
-        });
-      } else {
-        console.log("deserialize failed");
-        done(null, false);
-      }
+      userController.findUserByid(id, (data) => {
+        if (data.error) {
+          done(null, false);
+        } else done(null, data);
+      });
     });
 
     // lấy cái id đã lưu trước đó từ new LocalStrategy và nhả cho deserialize

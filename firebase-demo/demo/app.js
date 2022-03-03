@@ -64,7 +64,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/", indexRouter);+
 app.use(
   "/users",
-  passport.authenticate("local", { failureRedirect: "/" }),
+  // passport.authenticate("local", { failureRedirect: "/" }),
   usersRouter
 );
 
@@ -72,9 +72,8 @@ app.use("/product", productRouter);
 
 app.post(
   "/api/auth/login",
-  passport.authenticate("local", { failureRedirect: "/" }),
+  passport.authenticate("local", { failureRedirect: "/users/not-found" }),
   (req, res) => {
-    res.cookie("something", "00000");
     res.send(req.user);
   }
 );
