@@ -4,8 +4,8 @@ const userController = require("../controllers/user.controller");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  console.log(req.cookies);
-  res.send("respond with a resource");
+   console.log(req.cookies);
+   res.send("respond with a resource");
 });
 
 /**
@@ -17,19 +17,19 @@ router.get("/", function (req, res, next) {
  */
 
 router.post("/update-default-pass", (req, res, next) => {
-  userController.updateDefaultPasswordsForAllUser((resData) => {
-    res.send(resData);
-  });
+   userController.updateDefaultPasswordsForAllUser((resData) => {
+      res.send(resData);
+   });
 });
 
 /**
  * KHI REDIRECT ĐẾN ENDPOINT NÀY CÓ NGHĨA USER ĐÓ AUTHEN THẤT BẠI
  */
 router.get("/not-found", (req, res) => {
-  res.send({
-    error: true,
-    errorMsg: "Đăng nhập thất bại",
-  });
+   res.status(401).send({
+      error: true,
+      errorMsg: "Đăng nhập thất bại",
+   });
 });
 
 module.exports = router;
