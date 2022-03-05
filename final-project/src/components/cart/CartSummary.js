@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 class CartSummary extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hasDiscount: false,
-      price: 20000000,
-    };
   }
   render() {
     return (
@@ -18,7 +14,7 @@ class CartSummary extends Component {
           <div className="current-total d-flex mb-2">
             <div className="title-curr-total flex-grow-1">Tạm tính</div>
             <div className="curr-total-value">
-              <b>{this.state.price.toLocaleString('tr-TR')}</b>
+              <b>{this.props.total.toLocaleString('tr-TR')}</b>
             </div>
           </div>
           <div className="discount border-bottom d-flex">
