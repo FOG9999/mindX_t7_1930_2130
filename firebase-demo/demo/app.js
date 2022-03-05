@@ -14,6 +14,8 @@ const passport = require("passport");
 const { authenticateRequest } = require("./middlewares/auth.middleware");
 const productRouter = require("./routes/product.route");
 const cartRouter = require("./routes/cart.route");
+const voucherRouter = require("./routes/voucher.route");
+const cartProductRouter = require("./routes/cartProduct.route");
 
 var app = express();
 
@@ -72,6 +74,10 @@ app.use(
 app.use("/product", productRouter);
 
 app.use("/cart", cartRouter);
+
+app.use("/voucher", voucherRouter);
+
+app.use("/cartProduct", cartProductRouter);
 
 app.post(
   "/api/auth/login",

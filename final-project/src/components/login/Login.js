@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { authService } from "../../apis/AuthService";
+import { Spin, notification } from "antd";
 
 class Login extends Component {
   state = {
@@ -40,8 +43,9 @@ class Login extends Component {
   render() {
     return (
       <div className="container-fluid main d-flex justify-content-center align-items-center">
-        <ToastContainer /> 
-        {this.state.loggedIn?<Navigate to="/home-page" />: null}
+        <ToastContainer />
+        <Spin spinning={this.state.loading} />
+        {this.state.loggedIn ? <Navigate to="/home-page" /> : null}
         <div className="login-wrapper">
           <div className="header">
             <h4 style={{ fontWeight: 700 }}>Login</h4>

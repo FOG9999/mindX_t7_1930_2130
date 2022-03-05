@@ -2,7 +2,7 @@ const db = require("../database/database");
 const fakeCarts = require("../data.json").message.carts;
 
 module.exports = {
-    insertFakeProducts: async (done) => {
+    insertFakeCarts: async (done) => {
       try {
         let batch = db.batch();
         fakeCarts.forEach((car) => {

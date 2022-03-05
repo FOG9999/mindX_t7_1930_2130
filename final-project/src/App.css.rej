@@ -1,0 +1,10 @@
+diff a/final-project/src/App.css b/final-project/src/App.css	(rejected hunks)
+@@ -119,6 +119,8 @@
+ }
+ 
+ .card-container:hover {
++  transform: scale(1.2);
++  transition: all .5s ease;
+   position: absolute;
+   top: 0px;
+   left: 0px;
