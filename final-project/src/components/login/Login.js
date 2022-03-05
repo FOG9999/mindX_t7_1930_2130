@@ -1,47 +1,68 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { authService } from "../../apis/AuthService";
+import { Spin, notification } from "antd";
 
 class Login extends Component {
   state = {
-      username: '',
-      password:'',
-      loggedIn: false,
+    username: "",
+    password: "",
+    loggedIn: false,
+    loading: false,
   };
 
-  onChangeUsername = (evnt) =>{ 
+  onChangeUsername = (evnt) => {
     this.setState({ username: evnt.target.value });
-  }
+  };
 
-  onChangePassword = (evnt) =>{ 
+  onChangePassword = (evnt) => {
     this.setState({ password: evnt.target.value });
-  }
+  };
 
   submit = () => {
-      let fakeUser = JSON.parse(localStorage.getItem('fakeUser'));
-      if (this.state.username !== fakeUser.username){
-          toast("Username does not exist!");
+    // let fakeUser = JSON.parse(localStorage.getItem("fakeUser"));
+    // if (this.state.username !== fakeUser.username) {
+    //   toast("Username does not exist!");
+    // } else if (
+    //   this.state.username === fakeUser.username &&
+    //   this.state.password !== fakeUser.password
+    // ) {
+    //   toast("Password inputed is wrong!");
+    // } else {
+    this.setState({
+      losding: true,
+    });
+    const { username, password } = this.state;
+    authService.login(username, password, (res) => {
+      if (res.error) {
+        notification.error(res.errorMessage);
+      } else {
+        this.setState({
+          loggedIn: true,
+          loading: false,
+        });
       }
-      else if (this.state.username === fakeUser.username && this.state.password !== fakeUser.password){
-          toast("Password inputed is wrong!");
-      }
-      else {
-          this.setState({
-            loggedIn: true
-          })
-      }
-  }
+    });
+    // }
+  };
+
 
   componentDidMount() {
-      localStorage.setItem('fakeUser', JSON.stringify({username: 'Snavy', password: '123456'}))
+    localStorage.setItem(
+      "fakeUser",
+      JSON.stringify({ username: "Snavy", password: "123456" })
+    );
   }
 
   render() {
     return (
       <div className="container-fluid main d-flex justify-content-center align-items-center">
-        <ToastContainer /> 
-        {this.state.loggedIn?<Navigate to="/home-page" />: null}
+        <ToastContainer />
+        <Spin spinning={this.state.loading} />
+        {this.state.loggedIn ? <Navigate to="/home-page" /> : null}
         <div className="login-wrapper">
           <div className="header">
             <h4 style={{ fontWeight: 700 }}>Login</h4>
@@ -76,15 +97,17 @@ class Login extends Component {
           </div>
           <div className="d-flex justify-content-end">
             <span>
-              <a href="#" className="link">
+              <Link to="#" className="link">
                 Forgot your password?
-              </a>
+              </Link>
             </span>
           </div>
-          <div className="my-2 p-2 button-login" onClick={this.submit}>LOGIN</div>
+          <div className="my-2 p-2 button-login" onClick={this.submit}>
+            LOGIN
+          </div>
           <div className="text-center mt-5">
             <span style={{ fontWeight: 600 }}>
-              Don't have an account? <a href="#">Sign up</a>
+              Don't have an account? <Link to="/sign-up">Sign up</Link>
             </span>
           </div>
         </div>

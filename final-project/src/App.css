@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -49,7 +50,7 @@
 
 .main {
   min-height: 100vh;
-  background-image: url("../src/draft/thangnd/background-login.png");
+  background-image: url('../src/draft/thangnd/background-login.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,4 +94,73 @@
   padding: 5px 10px;
   align-items: center;
   background-color: darkgrey;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+
+.whole-container {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.info-div {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.payment-method {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.card-container:hover {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
+
+.card-container {
+  transition: .5s;
+
+}
+
+.cardWrapper:hover {
+  z-index: 1000;
+  transition: .5s ease;
+  transform: scale(1.1);
+}
+
+.cardWrapper {
+  /* z-index: 1; */
+  position: relative;
+  transition: .5s ease;
+}
+
+
+/* Cart */
+.product {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.product-image {
+  width: 150px;
+  padding-right: 20px;
+}
+
+.no-of-products {
+  display: flex;
+  vertical-align: center;
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: top;
 }

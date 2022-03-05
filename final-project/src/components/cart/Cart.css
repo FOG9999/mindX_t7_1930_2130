@@ -1,0 +1,24 @@
+.circle {
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
+
+.selected-circle {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.btn-custom {
+  font-size: 20px;
+  background-color: #666;
+  border-radius: 3px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.cart-container {
+  margin: auto;
+  width: fit-content;
+}
