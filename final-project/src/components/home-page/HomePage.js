@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import OneCartProduct from '../cart/OneCartProduct';
+import Cart from '../cart/Cart';
 
 class HomePage extends Component {
   state = {};
   render() {
     return (
       <div>
-        <OneCartProduct />
+        <Cart />
       </div>
     );
   }
