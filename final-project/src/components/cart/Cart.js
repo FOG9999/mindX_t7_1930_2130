@@ -57,7 +57,7 @@ class Cart extends Component {
   renderListItems = () => {
     return (
       <div>
-        {this.state.products.slice(0, 5).map((item, index) => {
+        {this.state.products.map((item, index) => {
           return (
             <OneCartProduct
               item={item}
