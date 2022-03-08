@@ -35,7 +35,10 @@ export default class OneCartProduct extends React.Component {
           </div>
           <div className="quantity" style={{ width: '100px' }}>
             <div className="d-flex">
-              <div className="btn-custom d-flex align-items-center justify-content-center">
+              <div
+                onClick={() => this.props.onMinusAmountItem(this.props.item.id)}
+                className="btn-custom d-flex align-items-center justify-content-center"
+              >
                 -
               </div>
               <input
