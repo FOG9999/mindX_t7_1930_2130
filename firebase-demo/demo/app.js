@@ -13,6 +13,7 @@ const session = require("express-session");
 const passport = require("passport");
 const { authenticateRequest } = require("./middlewares/auth.middleware");
 const productRouter = require("./routes/product.route");
+const cartRouter = require("./routes/cart.route");
 
 var app = express();
 
@@ -54,6 +55,8 @@ app.use(
    // passport.authenticate("local", { failureRedirect: "/" }),
    usersRouter
 );
+
+app.use('/cart', cartRouter)
 
 app.use("/product", productRouter);
 

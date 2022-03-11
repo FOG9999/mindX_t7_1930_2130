@@ -16,7 +16,7 @@ router.get("/", function (req, res, next) {
   });
  */
 
-router.post("/update-default-pass", (req, res, next) => {
+router.post("/update-default-pass",  (req, res, next) => {
    userController.updateDefaultPasswordsForAllUser((resData) => {
       res.send(resData);
    });
