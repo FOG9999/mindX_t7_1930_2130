@@ -15,7 +15,7 @@ class Specification extends Component {
 
     render() {
         return (
-            <Card style={{ width: "300px", marginTop: "10px", marginBottom: "10px" }} hoverable={true} bordered={true}>
+            <Card style={{ width: "300px", marginTop: "10px", marginBottom: "10px" }} hoverable={true} bordered={true} onClick={() => this.props.selectMe(this.props.index)}>
                 <div className="row">
                     <div className="col-10">{this.renderSpec()}</div>
                     <div className="col-2 p-2">{this.props.selectedSpec ? <CheckCircleFilled style={{ color: "green", fontSize: "20px" }} /> : null}</div>

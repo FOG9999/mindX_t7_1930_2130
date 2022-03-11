@@ -168,3 +168,7 @@
 .cursor-pointer:hover {
   cursor: pointer;
 }
+
+.img-container > .ant-image {
+  width: 100%;
+}

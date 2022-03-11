@@ -38,7 +38,6 @@ class ProductDetail extends Component {
         return this.state.product.images.map((img, index) => {
             return (
                 <div className="single-img-container col" key={index}>
-                    {/* <img src={img} className="single-img" style={{ width: "100%", height: "100px" }} alt="" /> */}
                     <Image
                         width={'100%'}
                         height={'100px'}
@@ -52,14 +51,14 @@ class ProductDetail extends Component {
 
     renderProductSpecs = () => {
         return this.state.product.listOfSpecs.map((spec, index) => {
-            return <Specification spec={spec} selectedSpec={this.state.selectedSpecIndex === index} key={index} />;
+            return <Specification selectMe={this.onSelectSpec} index={index} spec={spec} selectedSpec={this.state.selectedSpecIndex === index} key={index} />;
         });
     };
 
     renderColors = () => {
         return this.state.product.colors.map((color, index) => {
             return (
-                <Card hoverable={true} bordered={true} key={index}>
+                <Card hoverable={true} bordered={true} key={index} onClick={() => this.onSelectColor(index)}>
                     <div className={this.state.selectedColorIndex === index ? "row selected" : "row not-selected"}>
                         <div className="col-2 justify-content-center align-items-center">
                             <div style={{ width: "20px", height: "100%", backgroundColor: color, borderRadius: "50%" }}></div>
@@ -76,13 +75,30 @@ class ProductDetail extends Component {
         });
     };
 
+    onSelectImage = (imgIndex) => {
+        this.setState({
+            selectedImgIndex: imgIndex
+        })
+    }
+
+    onSelectColor = (colorIndex) => {
+        this.setState({
+            selectedColorIndex: colorIndex
+        })
+    }
+
+    onSelectSpec = (specIndex) => {
+        this.setState({
+            selectedSpecIndex: specIndex
+        })
+    }
+
     render() {
         return (
             <div className="row" style={{ maxWidth: "1400px", margin: "auto", padding: "20px" }}>
                 <div className="col-md-6">
                     <div className="img-container">
-                        {/* <img src={this.state.product.images[0]} alt="" className="main-img" /> */}
-                        <Image src={this.state.product.images[0]}></Image>
+                        <Image src={this.state.product.images[0]} className="w-100"></Image>
                     </div>
                     <div className="list-img-container row mt-2">
                         <Image.PreviewGroup>
