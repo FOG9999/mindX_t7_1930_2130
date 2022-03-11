@@ -10,6 +10,7 @@ class Cart extends Component {
     this.state = {
       total: 0,
       products: fakeProducts.message.products,
+      carts: fakeProducts.message.carts,
     };
   }
 

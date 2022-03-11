@@ -1,10 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chi tiết sản phẩm</title>
-  </head>
-  <body></body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chi tiết sản phẩm</title>
+        <link rel="stylesheet" href="detail.css" />
+    </head>
+    <body>
+        <h3>iPad Pro 11 2021 M1 Wi-Fi 128GB <span>(No.00750590)</span></h3>
+        <section class="main-section">
+            <article>
+                <div class="product-image-container">
+                    <img class="product-image" src="ipad.png" />
+                </div>
+                <div class="product-detail-container">
+                    <img
+                        class="product-detail-icon"
+                        src="icons/cell-phone.png"
+                    />
+                    <span class="product-detail"
+                        >11.0 inch, IPS LCD, Liquid Retina HD, 2388 x 1668
+                        Pixels</span
+                    ><br />
+                    <img
+                        class="product-detail-icon"
+                        src="icons/camera-lens.png"
+                    />
+                    <span class="product-detail">12.0 MP + 10.0 MP</span><br />
+                    <img class="product-detail-icon" src="icons/stick.png" />
+                    <span class="product-detail">12.0 MP</span><br />
+                    <img class="product-detail-icon" src="icons/chip.png" />
+                    <span class="product-detail">Apple M1</span><br />
+                    <img
+                        class="product-detail-icon"
+                        src="icons/hard-drive.png"
+                    />
+                    <span class="product-detail">128 GB</span>
+                </div>
+                <img class="product-detail-icon" src="icons/medal.png" />
+                <span>Hàng chính hãng - bảo hành 12 Tháng</span>
+                <img
+                    class="product-detail-icon"
+                    src="icons/fast-delivery.png"
+                />
+                <span>Giao hàng toàn quốc</span>
+            </article>
+            <article style="height: 1500px">
+                <p class="main-price">19.999.000<u>đ</u></p>
+                <div class="price-choice">
+                    <input
+                        id="first-price"
+                        type="radio"
+                        name="price"
+                        value="128GB"
+                        checked="checked"
+                    />
+                    <label class="sub-price" for="first-price">
+                        128GB
+                        <br />
+                        <span>19.999.000đ</span>
+                    </label>
+                    <input
+                        id="second-price"
+                        type="radio"
+                        name="price"
+                        value="256GB"
+                    />
+                    <label class="sub-price" for="second-price">
+                        256GB
+                        <br />
+                        <span>24.499.000đ</span>
+                    </label>
+                    <input
+                        id="third-price"
+                        type="radio"
+                        name="price"
+                        value="512GB"
+                    />
+                    <label class="sub-price" for="third-price">
+                        512GB
+                        <br />
+                        <span>26.999.000đ</span>
+                    </label>
+                </div>
+                <div class="color-choice">
+                    <input
+                        id="first-color"
+                        type="radio"
+                        name="color"
+                        value="silver"
+                        checked="checked"
+                    />
+                    <label
+                        for="first-color"
+                        style="background-color: silver"
+                    ></label>
+                    <input
+                        id="second-color"
+                        type="radio"
+                        name="color"
+                        value="silver"
+                    />
+                    <label
+                        for="second-color"
+                        style="background-color: gray"
+                    ></label>
+                </div>
+            </article>
+        </section>
+    </body>
 </html>
