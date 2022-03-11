@@ -164,3 +164,7 @@
   display: inline-block;
   vertical-align: top;
 }
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
