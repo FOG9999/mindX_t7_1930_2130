@@ -1,0 +1,16 @@
+1. Frontend (FE):
+- trang chi tiết
+- function cart
+- header+footer
+- search keyword
+- filter category
+- add to cart
+- user profile
+
+2. Backend (BE):
+- search products
+- get user
+- get seller
+- add to cart
+- functioning on cart
+- vouchers functions

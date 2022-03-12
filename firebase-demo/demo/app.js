@@ -22,35 +22,22 @@ var app = express();
 require("dotenv").config({});
 
 app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
+   session({
+      secret: process.env.SECRET,
+      resave: false,
+      saveUninitialized: true,
+   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "http://www.medical-club.com:3000",
-    ],
-    methods: ["OPTIONS", "GET", "POST", "HEAD", "PUT"],
-    credentials: true,
-    allowedHeaders: [
-      "Accept",
-      "Accept-Language",
-      "Content-Language",
-      "Content-Type",
-      "Authorization",
-      "Cookie",
-      "X-Requested-With,Origin",
-      "Host",
-    ],
-    // exposedHeaders: ["Set-Cookie"],
-  })
+   cors({
+      origin: ["http://localhost:3000", "http://127.0.0.1:3000", "http://www.medical-club.com:3000"],
+      methods: ["OPTIONS", "GET", "POST", "HEAD", "PUT"],
+      credentials: true,
+      allowedHeaders: ["Accept", "Accept-Language", "Content-Language", "Content-Type", "Authorization", "Cookie", "X-Requested-With,Origin", "Host"],
+      // exposedHeaders: ["Set-Cookie"],
+   })
 );
 initPassport(passport);
 
@@ -66,9 +53,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/", indexRouter);+
 app.use(
-  "/users",
-  passport.authenticate("local", { failureRedirect: "/" }),
-  usersRouter
+   "/users",
+   // passport.authenticate("local", { failureRedirect: "/" }),
+   usersRouter
 );
 
 app.use("/product", productRouter);
@@ -90,18 +77,18 @@ app.post(
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+   // set locals, only providing error in development
+   res.locals.message = err.message;
+   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+   // render the error page
+   res.status(err.status || 500);
+   res.render("error");
 });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+   next(createError(404));
 });
 
 module.exports = app;
