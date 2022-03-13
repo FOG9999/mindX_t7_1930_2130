@@ -7,6 +7,7 @@ import HomePage from './components/home-page/HomePage';
 import Singup from './components/btvn/thangnd/Signup-thangnd';
 import Cart from './components/cart/Cart';
 import 'antd/dist/antd.css';
+import ProductDetail from './components/product-detail/ProductDetail';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/home-page" element={<HomePage />} />
       <Route path="sign-up" element={<Singup />} />
-      <Route path="my-cart" element={<Cart />} />
+      <Route path="/my-cart" element={<Cart />} />
+      <Route path="/detail" element={<ProductDetail />} />
     </Routes>
   );
 }
