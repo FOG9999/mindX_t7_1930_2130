@@ -10,15 +10,15 @@ import 'antd/dist/antd.css';
 import ProductDetail from './components/product-detail/ProductDetail';
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home-page" element={<HomePage />} />
-      <Route path="sign-up" element={<Singup />} />
-      <Route path="/my-cart" element={<Cart />} />
-      <Route path="/detail" element={<ProductDetail />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home-page" element={<HomePage />} />
+            <Route path="sign-up" element={<Singup />} />
+            <Route path="/my-cart" element={<Cart />} />
+            <Route path="/detail" element={<ProductDetail />} />
+        </Routes>
+    );
 }
 
 export default App;
