@@ -16,7 +16,7 @@ productRouter.get('/search', authenticateRequest, (req, res) => {
     });
 });
 
-productRouter.get('/:id', function (req, res, next) {
+productRouter.get('/:id', (req, res, next) => {
     // lấy ra cái id mà FE gửi lên
     const productId = req.params.id;
     productController.getProductDetail(productId, (data) => {
