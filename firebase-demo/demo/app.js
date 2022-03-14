@@ -49,14 +49,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter);+
+app.use("/", indexRouter);
 app.use(
    "/users",
    // passport.authenticate("local", { failureRedirect: "/" }),
    usersRouter
 );
 
-app.use('/cart', cartRouter)
+// app.use('/cart', cartRouter)
 
 app.use("/product", productRouter);
 
