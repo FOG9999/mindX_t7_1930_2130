@@ -50,19 +50,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use(
-   "/users",
-   // passport.authenticate("local", { failureRedirect: "/" }),
-   usersRouter
-);
+app.use("/users", usersRouter);
 
-// app.use('/cart', cartRouter)
-
+////////////////////////// !important
 app.use("/product", productRouter);
 
 app.post("/api/auth/login", passport.authenticate("local", { failureRedirect: "/users/not-found" }), (req, res) => {
    res.send(req.user);
 });
+
+app.use("/cart", cartRouter);
 
 // error handler
 app.use(function (err, req, res, next) {

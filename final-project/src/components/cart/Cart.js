@@ -10,6 +10,7 @@ class Cart extends Component {
     this.state = {
       total: 0,
       products: fakeProducts.message.products,
+      carts: fakeProducts.message.carts,
     };
   }
 
@@ -43,12 +44,24 @@ class Cart extends Component {
   };
 
   onMinusAmountItem = (itemId) => {
-    // stock -= 1
+    let selectedIndex = -1;
+    let selected = this.state.products.filter((item, index) => {
+      if (item.id === itemId) {
+        selectedIndex = index;
+        return true;
+      } else {
+        return false;
+      }
+    })[0];
+    if (selected) {
+      selected.stocks -= 1;
+      const updatedProducts = this.state.products;
+      updatedProducts[selectedIndex] = selected;
+      this.setState({ products: updatedProducts });
+      this.calculateTotal();
+    } else {
+    }
   };
-
-  // putIntoCart = () => {
-  //   this.setState({ total: this.state.total + 1 });
-  // };
 
   componentDidMount = () => {
     this.calculateTotal();
@@ -63,7 +76,7 @@ class Cart extends Component {
               item={item}
               key={index}
               onAddAmountItem={this.onAddAmountItem}
-              // putIntoCart={this.putIntoCart}
+              onMinusAmountItem={this.onMinusAmountItem}
             />
           );
         })}
