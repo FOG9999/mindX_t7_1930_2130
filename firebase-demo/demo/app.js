@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
    cors({
-      origin: ["http://localhost:3000", "http://127.0.0.1:3000", "http://www.medical-club.com:3000"],
+      origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
       methods: ["OPTIONS", "GET", "POST", "HEAD", "PUT"],
       credentials: true,
       allowedHeaders: ["Accept", "Accept-Language", "Content-Language", "Content-Type", "Authorization", "Cookie", "X-Requested-With,Origin", "Host"],

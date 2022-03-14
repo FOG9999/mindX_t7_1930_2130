@@ -6,7 +6,9 @@ import ip12 from "./ip12.png";
 import ip13 from "./ip13.png";
 import { productService } from "../../apis/ProductService";
 import { notification } from "antd";
-import { Pagination } from "antd";
+import { Pagination, Spin } from "antd";
+import { Card } from "antd";
+import { constants } from "../../constants";
 
 class Listings extends Component {
    state = {
@@ -14,26 +16,33 @@ class Listings extends Component {
       productBackend: [],
       currentPage: 1,
       pageSize: 20,
+      minValue: 0,
+      maxValue: 9,
+      total: 0,
+      loading: false,
    };
 
    componentDidMount() {
+      this.setState({
+         loading: true,
+      });
       productService.searchProducts("", "", 0, async (res) => {
          if (res.error) {
             notification.error({ message: res.errorMessage });
          } else {
             let data = await res;
             const displayButton = [];
-            data.forEach((value) => {
+            data.result.forEach((value) => {
                displayButton.push("none");
             });
-            this.setState({ productBackend: data, displayBtns: displayButton });
+            this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
          }
       });
    }
 
-   onPageChange = (page, pageSize) => {
+   onPageChange = (page) => {
       this.setState({
-         currentPage: page,
+         loading: true,
       });
       productService.searchProducts("", "", page - 1, async (res) => {
          if (res.error) {
@@ -41,10 +50,10 @@ class Listings extends Component {
          } else {
             let data = await res;
             const displayButton = [];
-            data.forEach((value) => {
+            data.result.forEach((value) => {
                displayButton.push("none");
             });
-            this.setState({ productBackend: data, displayBtns: displayButton });
+            this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
          }
       });
    };
@@ -89,8 +98,8 @@ class Listings extends Component {
                         <img src={item.paymentmethod1} className="payment-method" />
                      </a>
                   </div>
-                  <div className="btn-wrapper d-flex flex-col">
-                     <a href="" className="purchaseButton btn btn-danger fw-bolder text-nowrap" style={{ display: this.state.displayBtns[index] }}>
+                  <div className="btn-wrapper d-flex justify-content-center flex-col">
+                     <a href="" className="purchaseButton btn btn-danger fw-bolder mr-2 text-nowrap" style={{ display: this.state.displayBtns[index] }}>
                         Mua ngay
                      </a>
                      <a href="" className="compareButton btn btn-secondary fw-bolder text-nowrap" style={{ display: this.state.displayBtns[index] }}>
@@ -105,12 +114,127 @@ class Listings extends Component {
 
    render() {
       return (
-         <div className="container">
-            <div className="row g-4">{this.renderBlock()}</div>
-            <div className="d-flex justify-content-center p-2">
-               <Pagination defaultCurrent={1} total={50} pageSize={20} current={this.state.currentPage} onChange={this.onPageChange} />
+         <Spin spinning={this.state.loading} size="default">
+            <div className="container">
+               <div className="alert alert-primary alert-dismissible fade show" role="alert">
+                  <h4 className="alert-heading">
+                     Sale 50%! <span className="badge badge-primary">All New Products</span>{" "}
+                  </h4>
+                  <p>
+                     Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind
+                     of content
+                  </p>
+                  <hr />
+                  <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                  <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <nav className="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
+                  <a className="navbar-brand" href="#">
+                     NCT-JSI01
+                  </a>
+                  <button
+                     className="navbar-toggler"
+                     type="button"
+                     data-toggle="collapse"
+                     data-target="#navbarSupportedContent"
+                     aria-controls="navbarSupportedContent"
+                     aria-expanded="false"
+                     aria-label="Toggle navigation"
+                  >
+                     <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul className="navbar-nav mr-auto">
+                        <li className="nav-item dropdown">
+                           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Điện thoại
+                           </a>
+                           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a className="dropdown-item" href="#">
+                                 Action
+                              </a>
+                              <a className="dropdown-item" href="#">
+                                 Another action
+                              </a>
+                              <div className="dropdown-divider"></div>
+                              <a className="dropdown-item" href="#">
+                                 Something else here
+                              </a>
+                           </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Máy tính
+                           </a>
+                           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a className="dropdown-item" href="#">
+                                 Action
+                              </a>
+                              <a className="dropdown-item" href="#">
+                                 Another action
+                              </a>
+                              <div className="dropdown-divider"></div>
+                              <a className="dropdown-item" href="#">
+                                 Something else here
+                              </a>
+                           </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Phụ kiện điện tử
+                           </a>
+                           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a className="dropdown-item" href="#">
+                                 Action
+                              </a>
+                              <a className="dropdown-item" href="#">
+                                 Another action
+                              </a>
+                              <div className="dropdown-divider"></div>
+                              <a className="dropdown-item" href="#">
+                                 Something else here
+                              </a>
+                           </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Máy tính
+                           </a>
+                           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a className="dropdown-item" href="#">
+                                 Action
+                              </a>
+                              <a className="dropdown-item" href="#">
+                                 Another action
+                              </a>
+                              <div className="dropdown-divider"></div>
+                              <a className="dropdown-item" href="#">
+                                 Something else here
+                              </a>
+                           </div>
+                        </li>
+                     </ul>
+                     <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                     </form>
+                  </div>
+                  <div className="text-end">
+                     <button type="button" className="btn btn-outline-light mr-2">
+                        Đăng nhập
+                     </button>
+                     <button type="button" className="btn btn-warning">
+                        Đăng kí
+                     </button>
+                  </div>
+               </nav>
+               <div className="row g-4">{this.renderBlock()}</div>
+               <div className="d-flex justify-content-center mt-5 mb-2">
+                  <Pagination defaultCurrent={1} total={this.state.total} pageSize={constants.PAGE_SIZE} onChange={this.onPageChange} />
+               </div>
             </div>
-         </div>
+         </Spin>
       );
    }
 }
