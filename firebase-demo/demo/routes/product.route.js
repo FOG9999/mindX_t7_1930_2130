@@ -17,8 +17,8 @@ productRouter.post("/insert-fake-product", (req, res, next) => {
 });
 
 productRouter.get("/search", authenticateRequest, (req, res) => {
-   const { searchKey, category, page } = req.query;
-   console.log(page);
+   let { searchKey, category, page } = req.query;
+   page = parseInt(page);
    productController.getListProducts(searchKey, category, page, (data) => {
       res.send(data);
    });

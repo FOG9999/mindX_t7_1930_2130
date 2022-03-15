@@ -29,7 +29,7 @@ module.exports = {
          }
          const productList = [];
          const MAX_AMOUNT = 20;
-         // lấy ra toàn bộ các sản phẩm thỏa mãn tìm kiếm
+         // lấy ra toàn bộ các sản phẩm thỏa mãn tìm kiếmt
          productSnapshot.forEach((pro) => {
             let data = pro.data();
             if (searchKey) {
@@ -39,8 +39,7 @@ module.exports = {
             } else productList.push(data);
          });
          // phân trang
-         let endOfPage = ((page + 1) * MAX_AMOUNT) > productList.length ? productList.length : ((page + 1) * MAX_AMOUNT);
-         console.log((page + 1) * MAX_AMOUNT);
+         let endOfPage = ((page + 1) * MAX_AMOUNT) > productList.length ? productList.length : ((page + 1) * MAX_AMOUNT);         
          done({ result: productList.slice(page * MAX_AMOUNT, endOfPage), total: productList.length });
       } catch (error) {
          done({

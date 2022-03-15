@@ -53,7 +53,7 @@ class Listings extends Component {
             data.result.forEach((value) => {
                displayButton.push("none");
             });
-            this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
+            this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false, currentPage: page });
          }
       });
    };
@@ -231,7 +231,7 @@ class Listings extends Component {
                </nav>
                <div className="row g-4">{this.renderBlock()}</div>
                <div className="d-flex justify-content-center mt-5 mb-2">
-                  <Pagination defaultCurrent={1} total={this.state.total} pageSize={constants.PAGE_SIZE} onChange={this.onPageChange} />
+                  <Pagination current={this.state.currentPage} defaultCurrent={1} total={this.state.total} pageSize={constants.PAGE_SIZE} onChange={this.onPageChange} />
                </div>
             </div>
          </Spin>
