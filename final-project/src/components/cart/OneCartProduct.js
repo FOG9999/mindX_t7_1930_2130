@@ -17,7 +17,7 @@ export default class OneCartProduct extends React.Component {
         </div>
         <div className="part-two d-flex flex-grow-1">
           <div className="name-detail flex-grow-1">
-            <h6>{this.props.item.title}</h6>
+            <h6>{this.props.item.product.title}</h6>
             <div className="d-flex">
               Màu{' '}
               <span
@@ -31,12 +31,14 @@ export default class OneCartProduct extends React.Component {
             </div>
           </div>
           <div className="price" style={{ width: '100px' }}>
-            {this.props.item.price.toLocaleString('tr-TR')}đ
+            {this.props.item.product.price.toLocaleString('tr-TR')}đ
           </div>
           <div className="quantity" style={{ width: '100px' }}>
             <div className="d-flex">
               <div
-                onClick={() => this.props.onMinusAmountItem(this.props.item.id)}
+                onClick={() =>
+                  this.props.onMinusAmountItem(this.props.item.product.id)
+                }
                 className="btn-custom d-flex align-items-center justify-content-center"
               >
                 -
@@ -44,11 +46,13 @@ export default class OneCartProduct extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                value={this.props.item.stocks}
+                value={this.props.item.amount}
                 style={{ width: '50px' }}
               />
               <div
-                onClick={() => this.props.onAddAmountItem(this.props.item.id)}
+                onClick={() =>
+                  this.props.onAddAmountItem(this.props.item.product.id)
+                }
                 className="btn-custom d-flex align-items-center justify-content-center"
               >
                 +
