@@ -32,6 +32,10 @@ class Listings extends Component {
          } else {
             let data = await res;
             const displayButton = [];
+            data.result.forEach((values) => {
+               let images = JSON.parse(values.images)
+               values.images = images
+            })
             data.result.forEach((value) => {
                displayButton.push("none");
             });
@@ -50,6 +54,10 @@ class Listings extends Component {
          } else {
             let data = await res;
             const displayButton = [];
+            data.result.forEach((values) => {
+               let images = JSON.parse(values.images)
+               values.images = images
+            })
             data.result.forEach((value) => {
                displayButton.push("none");
             });
@@ -76,7 +84,7 @@ class Listings extends Component {
       return this.state.productBackend.map((item, index) => (
          <div key={index} className="col-sm-6 col-md-3 cardWrapper" onMouseOver={() => this.onMouseOver(index)} onMouseOut={() => this.onMouseOut(index)}>
             <div className="card card-container mt-5">
-               <img src={item.images[2]} alt="" className="card-img-top img-fluid" />
+               <img src={item.images[0]} alt="" className="card-img-top img-fluid" />
                <div className="card-body">
                   <h5 className="card=title">{item.product}</h5>
                   <h5 className="badge rounded-pill bg-danger text-white">{item.price}</h5>
