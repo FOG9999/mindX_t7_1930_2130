@@ -24,10 +24,11 @@ module.exports = {
         }
     },
     updateProductImages: async (done) => {
-        try {
-            const newImages = getRandomImages();
+        try {            
             const batch = db.batch();
+            const productRef = db.collection("products");
             (await productRef.listDocuments()).forEach((proRef) => {
+               const newImages = getRandomImages();
                 batch.update(proRef, {
                     images: JSON.stringify(newImages),
                     //    id: 1,
