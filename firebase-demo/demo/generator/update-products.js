@@ -8,7 +8,7 @@ const getRandomImages = () => {
     let output = [];
     for(let i=0; i<numOfImages; i++){
         let randomIndex = Math.round(Math.random()*productImages.length);
-        output.push(productImages[randomIndex]);
+        output.push(SHOPEE_IMAGE_SERVER+productImages[randomIndex]);
     }
     return output;
 }
