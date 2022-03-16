@@ -1,4 +1,5 @@
 const productRouter = require("express").Router();
+const dataConfigController = require("../controllers/data-config.controller");
 const productController = require("../controllers/product.controller");
 const { authenticateRequest } = require("../middlewares/auth.middleware");
 
@@ -32,5 +33,12 @@ productRouter.get("/:id", (req, res, next) => {
    });
    // call function trong controller và return về FE
 });
+
+
+productRouter.post('/update-product-images', (req, res) => {
+   dataConfigController.updateProductImages((data) => {
+      res.send(data)
+   })
+})
 
 module.exports = productRouter;
