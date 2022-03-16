@@ -1,3 +1,5 @@
+const { SHOPEE_IMAGE_SERVER } = require('./apis');
+
 const shopeeProducts = require('./shopee-products.json').items;
 let productImages = [];
 shopeeProducts.forEach(pro => {productImages = [...productImages, ...pro.item_basic.images]})
