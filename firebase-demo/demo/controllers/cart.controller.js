@@ -1,5 +1,4 @@
 const db = require('../database/database');
-const fakeUsers = require('../data.json').message.users;
 
 module.exports = {
   getCartForUser: async (user, done) => {
