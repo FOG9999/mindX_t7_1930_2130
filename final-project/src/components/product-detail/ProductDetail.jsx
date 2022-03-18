@@ -1,5 +1,5 @@
 import { CheckCircleFilled } from '@ant-design/icons';
-import { Card, Image } from 'antd';
+import { Card, Image, Spin } from 'antd';
 import React, { Component } from 'react';
 import Specification from './Specification';
 import './ProductDetail.css';
@@ -7,56 +7,43 @@ import { toast } from 'react-toastify';
 // import * as CONSTANTS from '../../constants'
 import { productService } from '../../apis/ProductService';
 
-const PRODUCT = {
-    colors: ['yellow', 'white', 'red', 'pink'],
-    created_date: '2022-02-24',
-    description:
-        'Maiores enim architecto nesciunt nobis. Ex soluta temporibus itaque est veritatis. Ullam aut deleniti voluptas consequuntur enim cumque quis consequatur. Cupiditate optio blanditiis eaque necessitatibus natus delectus praesentium temporibus.\n \rTempora dolores molestiae consequatur ut temporibus sit voluptatem. Dolore molestiae sint eum fuga consequatur nulla. Assumenda dolor necessitatibus aut. Et explicabo pariatur voluptates odio.\n \rNostrum sed laborum aspernatur quo eius corporis vel iste corporis. Porro nobis et commodi. Autem in natus sunt est voluptatum. Nam quibusdam vero non eaque iusto sed.',
-    id: '6bc12e87-a679-4d09-8f28-4e10ae7e1c16',
-    images: [
-        'http://placeimg.com/640/480',
-        'http://placeimg.com/640/480',
-        'http://placeimg.com/640/480',
-        'http://placeimg.com/640/480',
-    ],
-    last_updated: '2022-02-24',
-    price: '586.00',
-    seller: '4ec2bcef-ddb9-4519-a600-962c52b6cfd1',
-    stocks: 30,
-    title: 'Handcrafted Steel Mouse',
-    type: 'phone',
-    listOfSpecs: [
-        ['512GB', '2.4GHz Quad Core', '8GB RAM | 512Gb SSD'],
-        ['512GB', '2.4GHz Quad Core', '8GB RAM | 512Gb SSD'],
-        ['512GB', '2.4GHz Quad Core', '8GB RAM | 512Gb SSD'],
-        ['512GB', '2.4GHz Quad Core', '8GB RAM | 512Gb SSD'],
-    ],
-};
-
 class ProductDetail extends Component {
     state = {
-        product: PRODUCT,
+        product: null,
         selectedImgIndex: 0,
         selectedColorIndex: 0,
         selectedSpecIndex: 0,
+        productId: null,
+        loading: false
     };
 
     componentDidMount() {
-        // const productId = this.props.params.match.productId;
-        // productService.getProductDetail(productId, async (res) => {
-        //     if (res.error) {
-        //         toast.error(res.errorMessage);
-        //         // this.setState({
-        //         //   loading: false,
-        //         // });
-        //     } else {
-        //         let data = await res;
-        //         console.log(data);
-        //         this.setState({
-        //             product: data,
-        //         });
-        //     }
-        // });
+        this.setState({
+            loading: true
+        })
+        let productId = new URLSearchParams(window.location.search).get('id');
+        productService.getProductDetail(productId, async (res) => {
+            if (res.error) {
+                toast.error(res.errorMessage);
+                // this.setState({
+                //   loading: false,
+                // });
+            } else {
+                let data = await res;
+                console.log(data);
+                this.setState({
+                    productId,
+                    loading: false,
+                    product: this.transformProductData(data),
+                });
+            }
+        });
+    }
+
+    transformProductData = (dataBackend) => {
+        dataBackend.images = JSON.parse(dataBackend.images);
+        dataBackend.listSpecs = JSON.parse(dataBackend.listSpecs);
+        return dataBackend;
     }
 
     renderProductImages = () => {
@@ -70,7 +57,7 @@ class ProductDetail extends Component {
     };
 
     renderProductSpecs = () => {
-        return this.state.product.listOfSpecs.map((spec, index) => {
+        return this.state.product.listSpecs.map((spec, index) => {
             return (
                 <Specification
                     selectMe={this.onSelectSpec}
@@ -143,42 +130,47 @@ class ProductDetail extends Component {
 
     render() {
         return (
-            <div
-                className="row"
-                style={{ maxWidth: '1400px', margin: 'auto', padding: '20px' }}
-            >
-                <div className="col-md-6">
-                    <div className="img-container">
-                        <Image
-                            src={this.state.product.images[0]}
-                            className="w-100"
-                        ></Image>
-                    </div>
-                    <div className="list-img-container row mt-2">
-                        <Image.PreviewGroup>
-                            {this.renderProductImages()}
-                        </Image.PreviewGroup>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="product-title mb-3">
-                        {this.state.product.title}
-                    </div>
-                    <p>{this.state.product.description}</p>
-                    <div className="py-2">
-                        <b>Lựa chọn màu: </b>
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap">
-                        {this.renderColors()}
-                    </div>
-                    <div className="py-2">
-                        <b>Lựa chọn cấu hình: </b>
-                    </div>
-                    <div className="d-flex justify-content-between flex-wrap">
-                        {this.renderProductSpecs()}
-                    </div>
-                </div>
-            </div>
+            <Spin spinning={this.state.loading} size="default">
+                {
+                    this.state.product ? <div
+                        className="row"
+                        style={{ maxWidth: '1400px', margin: 'auto', padding: '20px' }}
+                    >
+                        <div className="col-md-6">
+                            <div className="img-container">
+                                <Image
+                                    src={this.state.product.images[0]}
+                                    className="w-100"
+                                ></Image>
+                            </div>
+                            <div className="list-img-container row mt-2">
+                                <Image.PreviewGroup>
+                                    {this.renderProductImages()}
+                                </Image.PreviewGroup>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="product-title mb-3">
+                                {this.state.product.title}
+                            </div>
+                            <p>{this.state.product.description}</p>
+                            <div className="py-2">
+                                <b>Lựa chọn màu: </b>
+                            </div>
+                            <div className="d-flex justify-content-between flex-wrap">
+                                {this.renderColors()}
+                            </div>
+                            <div className="py-2">
+                                <b>Lựa chọn cấu hình: </b>
+                            </div>
+                            <div className="d-flex justify-content-between flex-wrap">
+                                {this.renderProductSpecs()}
+                            </div>
+                        </div>
+                    </div> : null
+                }
+
+            </Spin>
         );
     }
 }
