@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+}
+
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    border: 1px solid black;
+}
+
+.main-section > article {
+    width: 49%;
+    height: fit-content;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.product-image-container {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    margin: 0 0 30px 0;
+}
+
+.product-image {
+    height: inherit;
+}
+
+.product-detail-container {
+    background-color: #edeeef;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.product-detail-icon {
+    width: 20px;
+    transform: translateY(4px);
+}
+
+.product-detail {
+    line-height: 30px;
+    font-size: 18px;
+}
+
+.main-price {
+    font-size: 25px;
+    font-weight: 600;
+    color: #cb3045;
+}
+
+.price-choice {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.price-choice > label {
+    width: 33%;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.price-choice > label::before {
+    position: absolute;
+    content: '';
+    height: 11px;
+    width: 11px;
+    border: 1px solid #c7ced9;
+    border-radius: 50%;
+    left: calc(50% - 40px);
+    top: 7px;
+}
+
+.price-choice > label:hover {
+    background-color: #edeeef;
+}
+
+.price-choice > input[type='radio'] {
+    display: none;
+}
+
+.price-choice > input[type='radio']:checked + label {
+    background-color: #edeeef;
+}
+
+.price-choice > input[type='radio']:checked + label:before {
+    border-color: #c52633;
+    box-shadow: inset 0 0 0 1px white;
+    background-color: #c52633;
+}
+
+.color-choice {
+    padding: 10px 0;
+}
+
+.color-choice > input[type='radio'] {
+    display: none;
+}
+
+.color-choice > label {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 3px white;
+}
+
+.color-choice > input[type='radio']:hover + label {
+    border: 1px solid #c52633;
+}
+
+.color-choice > input[type='radio']:checked + label {
+    border: 1px solid #c52633;
+}

@@ -1,0 +1,17 @@
+.main-img {
+    width: 100%
+}
+
+.selected {
+    opacity: 1;
+    font-weight: 700;
+}
+
+.not-selected {
+    opacity: 0.5
+}
+
+.product-title {
+    font-size: 25px;
+    font-weight: 700;
+}

@@ -164,3 +164,17 @@
   display: inline-block;
   vertical-align: top;
 }
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.img-container > .ant-image {
+  width: 100%;
+}
+
+.imgIcon {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}

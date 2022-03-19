@@ -12,7 +12,7 @@ module.exports = {
                   // nếu fail thì trả về false, passport sẽ hiểu là authen fail
                   done(null, false);
                } else {
-                  // nếu thành công thì lưu lại để hàm serialize sau sử dụng
+                  // nếu thành công thì lưu lại để hàm serialize sau sử dụng lưu vào req.passport.user
                   done(null, data);
                }
             });
