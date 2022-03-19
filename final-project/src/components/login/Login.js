@@ -49,7 +49,7 @@ class Login extends Component {
         <div className="container-fluid main d-flex justify-content-center align-items-center">
           <ToastContainer />
 
-          {this.state.loggedIn ? <Navigate to="/home-page" /> : null}
+          {this.state.loggedIn ? <Navigate to="/home-page" state={this.state}  /> : null}
           <div className="login-wrapper">
             <div className="header">
               <h4 style={{ fontWeight: 700 }}>Login</h4>
