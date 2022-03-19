@@ -14,7 +14,7 @@ class CartSummary extends Component {
           <div className="current-total d-flex mb-2">
             <div className="title-curr-total flex-grow-1">Tạm tính</div>
             <div className="curr-total-value">
-              <b>{this.props.total.toLocaleString('tr-TR')}</b>
+              <b>{parseInt(this.props.total).toLocaleString('tr-TR')}</b>
             </div>
           </div>
           <div className="discount border-bottom d-flex">
