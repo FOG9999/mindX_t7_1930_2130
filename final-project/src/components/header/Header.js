@@ -3,6 +3,7 @@ class Header extends Component {
     state = {
         loggedIn: false,
         userImg: "",
+        displayMenu: false
     }
 
     componentDidMount() {
@@ -12,6 +13,10 @@ class Header extends Component {
         } else {
             this.setState({ loggedIn: true, userImg: object.avatar });
         }
+    }
+
+    toggleMenu = () => {
+        this.setState({ displayMenu: !this.state.displayMenu });
     }
 
     render() {
@@ -122,7 +127,14 @@ class Header extends Component {
                         </form>
                     </div>
                     {
-                        this.state.loggedIn ? <img className="imgIcon" src={this.state.userImg} /> : <div className="text-end">
+                        this.state.loggedIn ? 
+                            <div style={{position: "relative"}}>
+                                <img className="imgIcon" src={this.state.userImg} onClick={() => this.toggleMenu()} />
+                                <div style={{display: this.state.displayMenu?'block':'none', position: "absolute", display: "block", zIndex: "1000", backgroundColor: "white", width: "200px", color: "black", cursor: "pointer"}}>
+                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none'}}>Profile</li>
+                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none'}}>Log Out</li>
+                                </div>
+                            </div> : <div className="text-end">
                             <button type="button" className="btn btn-outline-light mr-2">
                                 Đăng nhập
                             </button>

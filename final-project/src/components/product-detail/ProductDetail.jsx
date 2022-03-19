@@ -127,7 +127,7 @@ class ProductDetail extends Component {
             selectedSpecIndex: specIndex,
         });
     };
-
+    
     render() {
         return (
             <Spin spinning={this.state.loading} size="default">
