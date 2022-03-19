@@ -28,7 +28,7 @@ const productService = {
     },
 
     getProductDetail: (id, done) => {
-        fetch(constants.SERVER_API_URL + '/product/' + id, {
+        fetch(constants.SERVER_API_URL + 'product/' + id, {
             method: 'GET',
             credentials: 'include',
             headers: {

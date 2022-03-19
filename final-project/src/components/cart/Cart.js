@@ -3,15 +3,35 @@ import CartSummary from './CartSummary';
 import OneCartProduct from './OneCartProduct';
 import './Cart.css';
 import fakeProducts from './data.json';
+import { userService } from '../../apis/UserService';
+import { ToastContainer, toast } from 'react-toastify';
 
 class Cart extends Component {
   constructor() {
     super();
     this.state = {
       total: 0,
-      products: fakeProducts.message.products,
-      carts: fakeProducts.message.carts,
+      products: [],
+      // carts: fakeProducts.message.carts,
     };
+  }
+
+  callCartUser = () => {
+    userService.getCart(async (res) => {
+      if (res.error) {
+        toast.error(res.errorMessage);
+      } else {
+        let data = await res;
+        this.setState({
+          products: data.userProducts,
+          total: data.userCart.current_total,
+        });
+      }
+    });
+  };
+
+  componentDidMount() {
+    this.callCartUser();
   }
 
   calculateTotal = () => {
@@ -22,50 +42,46 @@ class Cart extends Component {
     this.setState({ total: price });
   };
 
-  onAddAmountItem = (itemId) => {
-    // filter items
-    let selectedIndex = -1;
-    let selected = this.state.products.filter((item, index) => {
-      if (item.id === itemId) {
-        selectedIndex = index;
-        return true;
-      } else {
-        return false;
-      }
-    })[0];
-    if (selected) {
-      selected.stocks += 1;
-      const updatedProducts = this.state.products;
-      updatedProducts[selectedIndex] = selected;
-      this.setState({ products: updatedProducts });
-      this.calculateTotal();
-    } else {
-    }
-  };
+  // onAddAmountItem = (itemId) => {
+  //   // filter items
+  //   let selectedIndex = -1;
+  //   let selected = this.state.products.filter((item, index) => {
+  //     if (item.id === itemId) {
+  //       selectedIndex = index;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   })[0];
+  //   if (selected) {
+  //     selected.stocks += 1;
+  //     const updatedProducts = this.state.products;
+  //     updatedProducts[selectedIndex] = selected;
+  //     this.setState({ products: updatedProducts });
+  //     this.calculateTotal();
+  //   } else {
+  //   }
+  // };
 
-  onMinusAmountItem = (itemId) => {
-    let selectedIndex = -1;
-    let selected = this.state.products.filter((item, index) => {
-      if (item.id === itemId) {
-        selectedIndex = index;
-        return true;
-      } else {
-        return false;
-      }
-    })[0];
-    if (selected) {
-      selected.stocks -= 1;
-      const updatedProducts = this.state.products;
-      updatedProducts[selectedIndex] = selected;
-      this.setState({ products: updatedProducts });
-      this.calculateTotal();
-    } else {
-    }
-  };
-
-  componentDidMount = () => {
-    this.calculateTotal();
-  };
+  // onMinusAmountItem = (itemId) => {
+  //   let selectedIndex = -1;
+  //   let selected = this.state.products.filter((item, index) => {
+  //     if (item.id === itemId) {
+  //       selectedIndex = index;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   })[0];
+  //   if (selected) {
+  //     selected.stocks -= 1;
+  //     const updatedProducts = this.state.products;
+  //     updatedProducts[selectedIndex] = selected;
+  //     this.setState({ products: updatedProducts });
+  //     this.calculateTotal();
+  //   } else {
+  //   }
+  // };
 
   renderListItems = () => {
     return (

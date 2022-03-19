@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import product_card from "./product_data";
-import ip10 from "./ip10.png";
-import ip11 from "./ip11.png";
-import ip12 from "./ip12.png";
-import ip13 from "./ip13.png";
 import { productService } from "../../apis/ProductService";
 import { notification } from "antd";
 import { Pagination, Spin } from "antd";
 import { Card } from "antd";
 import { constants } from "../../constants";
 import Header from "../../components/header/Header";
+import {Navigate} from 'react-router-dom'
 
 class Listings extends Component {
    state = {
@@ -21,6 +18,7 @@ class Listings extends Component {
       maxValue: 9,
       total: 0,
       loading: false,
+      forwardItemId: null
    };
 
    componentDidMount() {
@@ -81,9 +79,15 @@ class Listings extends Component {
 
    logOutConsole = () => console.log(product_card);
 
+   onClickItem = (itemId) => {
+      this.setState({
+         forwardItemId: itemId
+      })
+   }
+
    renderBlock = () => {
       return this.state.productBackend.map((item, index) => (
-         <div key={index} className="col-sm-6 col-md-3 cardWrapper" onMouseOver={() => this.onMouseOver(index)} onMouseOut={() => this.onMouseOut(index)}>
+         <div key={index} className="col-sm-6 col-md-3 cardWrapper" onClick={() => this.onClickItem(item.id)} onMouseOver={() => this.onMouseOver(index)} onMouseOut={() => this.onMouseOut(index)}>
             <div className="card card-container mt-5">
                <img src={item.images[0]} alt="" className="card-img-top img-fluid" />
                <div className="card-body">
@@ -125,6 +129,9 @@ class Listings extends Component {
       return (
          <Spin spinning={this.state.loading} size="default">
             <Header />
+            {
+               this.state.forwardItemId ? <Navigate to={"/detail?id="+this.state.forwardItemId} />: null
+            }
             <div className="container">
             <div className="row g-4">{this.renderBlock()}</div>
             <div className="d-flex justify-content-center mt-5 mb-2">

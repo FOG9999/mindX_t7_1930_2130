@@ -41,4 +41,10 @@ productRouter.post('/update-product-images', (req, res) => {
    })
 })
 
+productRouter.post('/update-cart-product', (req,res) => {
+   dataConfigController.updateCartProducts(resData => {
+      res.send(resData);
+   })
+})
+
 module.exports = productRouter;

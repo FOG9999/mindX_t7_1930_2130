@@ -15,7 +15,7 @@ const getRandomImages = () => {
     return output;
 }
 
-console.log(getRandomImages())
+// console.log(getRandomImages())
 
 module.exports = { 
     productImages,
