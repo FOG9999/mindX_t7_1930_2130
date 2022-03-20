@@ -6,6 +6,7 @@ import './ProductDetail.css';
 import { toast } from 'react-toastify';
 // import * as CONSTANTS from '../../constants'
 import { productService } from '../../apis/ProductService';
+import Header from '../header/Header';
 
 class ProductDetail extends Component {
     state = {
@@ -78,13 +79,14 @@ class ProductDetail extends Component {
                     bordered={true}
                     key={index}
                     onClick={() => this.onSelectColor(index)}
+                    className="my-1"
                 >
                     <div
                         className={
                             this.state.selectedColorIndex === index
                                 ? 'row selected'
                                 : 'row not-selected'
-                        }
+                        } style={{ width: '150px' }}
                     >
                         <div className="col-2 justify-content-center align-items-center">
                             <div
@@ -96,14 +98,18 @@ class ProductDetail extends Component {
                                 }}
                             ></div>
                         </div>
-                        <div className="col">{color}</div>
-                        {this.state.selectedColorIndex === index ? (
-                            <div>
-                                <CheckCircleFilled
-                                    style={{ color: 'green', fontSize: '20px' }}
-                                />
+                        <div className="col row">
+                            <div className="col">
+                                {color}
                             </div>
-                        ) : null}
+                            {this.state.selectedColorIndex === index ? (
+                                <div className='col'>
+                                    <CheckCircleFilled
+                                        style={{ color: 'green', fontSize: '20px' }}
+                                    />
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
                 </Card>
             );
@@ -127,14 +133,15 @@ class ProductDetail extends Component {
             selectedSpecIndex: specIndex,
         });
     };
-    
+
     render() {
         return (
             <Spin spinning={this.state.loading} size="default">
+                <Header />
                 {
                     this.state.product ? <div
-                        className="row"
-                        style={{ maxWidth: '1400px', margin: 'auto', padding: '20px' }}
+                        className="row container"
+                        style={{ margin: 'auto', padding: '20px' }}
                     >
                         <div className="col-md-6">
                             <div className="img-container">
