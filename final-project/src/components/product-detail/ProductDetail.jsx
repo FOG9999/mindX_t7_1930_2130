@@ -50,7 +50,7 @@ class ProductDetail extends Component {
     renderProductImages = () => {
         return this.state.product.images.map((img, index) => {
             return (
-                <div className="single-img-container col" key={index}>
+                <div className="single-img-container col" key={index} style={{ minWidth: '150px' }}>
                     <Image width={'100%'} height={'100px'} src={img} />
                 </div>
             );
@@ -150,7 +150,7 @@ class ProductDetail extends Component {
                                     className="w-100"
                                 ></Image>
                             </div>
-                            <div className="list-img-container row mt-2">
+                            <div className="list-img-container d-flex mt-2" style={{ overflowX: 'scroll' }}>
                                 <Image.PreviewGroup>
                                     {this.renderProductImages()}
                                 </Image.PreviewGroup>
