@@ -2,12 +2,28 @@ import React from 'react';
 
 export default class OneCartProduct extends React.Component {
 
+  renderListColors = () => {
+    return (
+      <div className="d-flex">
+        {
+          this.props.item.product.colors.map((color, index) => {
+            return (<span key={index}
+            className={this.props.item.selectedColorIndex === index?"selected-circle mx-1":"circle mx-1"}
+            style={{ color: color, backgroundColor: color }}
+            ></span>)
+          })
+        }
+      </div>
+    )
+    
+  }
+
   render() {
     return (
-      <div className="d-flex my-2" style={{ minWidth: '700px' }}>
+      <div className="d-flex my-3" style={{ minWidth: '700px' }}>
         <div className="d-flex justify-content-center align-items-center">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZWLAwg4bEAIhAyJ1lgI1F-Xlwx97SThFEsQ&usqp=CAU"
+            src={this.props.item.product.images[0]}
             className="product-image inline"
             alt=""
           />
@@ -15,17 +31,9 @@ export default class OneCartProduct extends React.Component {
         <div className="part-two d-flex flex-grow-1">
           <div className="name-detail flex-grow-1">
             <h6>{this.props.item.product.title}</h6>
-            <div className="d-flex">
-              Màu{' '}
-              <span
-                className="selected-circle mx-1"
-                style={{ color: 'grey', backgroundColor: 'grey' }}
-              ></span>{' '}
-              <span
-                className="circle"
-                style={{ color: 'black', backgroundColor: 'black' }}
-              ></span>
-            </div>
+            {
+              this.renderListColors()
+            }
           </div>
           <div className="price" style={{ width: '100px' }}>
             {this.props.item.product.price.toLocaleString('tr-TR')}đ
