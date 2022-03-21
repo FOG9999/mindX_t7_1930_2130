@@ -131,8 +131,8 @@ class Header extends Component {
                             <div style={{position: "relative"}}>
                                 <img className="imgIcon" src={this.state.userImg} onClick={() => this.toggleMenu()} />
                                 <div style={{display: this.state.displayMenu?'block':'none', position: "absolute", display: "block", zIndex: "1000", backgroundColor: "white", width: "200px", color: "black", cursor: "pointer"}}>
-                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none'}}>Profile</li>
-                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none'}}>Log Out</li>
+                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', border: "2px black solid", padding: "10px 25px", borderRadius: "5px"}}>Profile</li>
+                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', borderRight: "2px black solid", borderBottom: "2px black solid", borderLeft: "2px black solid", borderImage: "initial", padding: "10px 25px", borderRadius: "5px"}}>Log Out</li>
                                 </div>
                             </div> : <div className="text-end">
                             <button type="button" className="btn btn-outline-light mr-2">

@@ -18,6 +18,7 @@ class ProductDetail extends Component {
         loading: false
     };
 
+    // khi component mới được load l;ên lần đầu
     componentDidMount() {
         this.setState({
             loading: true
@@ -161,6 +162,11 @@ class ProductDetail extends Component {
                                 {this.state.product.title}
                             </div>
                             <p>{this.state.product.description}</p>
+                            <div className="row">
+                                <div className="col-3"></div>
+                                <div className="col-6 text-center rounded-pill p-3 mb-2 bg-secondary text-white bg-success bg-opacity-50">${this.state.product.price}</div>
+                                <div className="col-3"></div>
+                            </div>
                             <div className="py-2">
                                 <b>Lựa chọn màu: </b>
                             </div>
@@ -172,6 +178,13 @@ class ProductDetail extends Component {
                             </div>
                             <div className="d-flex justify-content-between flex-wrap">
                                 {this.renderProductSpecs()}
+                            </div>
+                            <div className="row">
+                                <div className="col-9 pb-2">
+                                    <div className="justify-content-center border border-dark text-dark bg-white align-items-center rounded-2 h-100 d-flex">Thêm vào giỏ hàng</div>
+                                </div>
+                                <div className="col-3 text-center p-3 mb-2 bg-secondary text-white rounded-2">Mua ngay</div>
+                                {/* Thêm vào đây 2 nút <Thêm vào giỏ hàng> và <Mua ngay> */} 
                             </div>
                         </div>
                     </div> : null
