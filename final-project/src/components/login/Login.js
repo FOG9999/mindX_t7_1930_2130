@@ -34,6 +34,7 @@ class Login extends Component {
         });
       } else {
         let data = await res; // res is a Promise
+        localStorage.setItem('userLoggedin', JSON.stringify(data));
         this.setState({
           loggedIn: true,
           loading: false,

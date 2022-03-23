@@ -172,3 +172,9 @@
 .img-container > .ant-image {
   width: 100%;
 }
+
+.imgIcon {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}

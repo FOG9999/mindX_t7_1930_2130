@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const userController = require("../controllers/user.controller");
+const { authenticateRequest } = require("../middlewares/auth.middleware");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -21,7 +22,9 @@ router.post("/update-default-pass",  (req, res, next) => {
       res.send(resData);
    });
 });
-
+router.get("/get-profile", authenticateRequest, function (req, res, next) {
+   res.send(req.user);
+})
 /**
  * KHI REDIRECT ĐẾN ENDPOINT NÀY CÓ NGHĨA USER ĐÓ AUTHEN THẤT BẠI
  */
@@ -33,3 +36,4 @@ router.get("/not-found", (req, res) => {
 });
 
 module.exports = router;
+

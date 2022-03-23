@@ -6,7 +6,7 @@ var logger = require("morgan");
 const cors = require("cors");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/users.route");
 
 const { initPassport } = require("./passport");
 const session = require("express-session");
@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
    cors({
-      origin: ["http://localhost:3000", "http://127.0.0.1:3000", "http://www.medical-club.com:3000"],
+      origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
       methods: ["OPTIONS", "GET", "POST", "HEAD", "PUT"],
       credentials: true,
       allowedHeaders: ["Accept", "Accept-Language", "Content-Language", "Content-Type", "Authorization", "Cookie", "X-Requested-With,Origin", "Host"],
@@ -49,20 +49,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter);+
-app.use(
-   "/users",
-   // passport.authenticate("local", { failureRedirect: "/" }),
-   usersRouter
-);
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
 
-app.use('/cart', cartRouter)
-
+////////////////////////// !important
 app.use("/product", productRouter);
 
+// request method: GET, POST, PUT, DELETE: khi muốn lấy ttin -> dùng GET; khi muốn thêm, sửa, xóa ttin -> POST
 app.post("/api/auth/login", passport.authenticate("local", { failureRedirect: "/users/not-found" }), (req, res) => {
    res.send(req.user);
 });
+
+app.use("/cart", cartRouter);
 
 // error handler
 app.use(function (err, req, res, next) {

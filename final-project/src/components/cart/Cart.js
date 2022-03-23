@@ -3,14 +3,37 @@ import CartSummary from './CartSummary';
 import OneCartProduct from './OneCartProduct';
 import './Cart.css';
 import fakeProducts from './data.json';
+import { userService } from '../../apis/UserService';
+import { ToastContainer, toast } from 'react-toastify';
+import Header from '../header/Header';
+import { parseProduct } from '../../utils/transform';
 
 class Cart extends Component {
   constructor() {
     super();
     this.state = {
       total: 0,
-      products: fakeProducts.message.products,
+      products: [],
+      // carts: fakeProducts.message.carts,
     };
+  }
+
+  callCartUser = () => {
+    userService.getCart(async (res) => {
+      if (res.error) {
+        toast.error(res.errorMessage);
+      } else {
+        let data = await res;
+        this.setState({
+          products: data.userProducts.map(pro => ({...pro, product: parseProduct(pro.product)})),
+          total: data.userCart.current_total,
+        });
+      }
+    });
+  };
+
+  componentDidMount() {
+    this.callCartUser();
   }
 
   calculateTotal = () => {
@@ -21,38 +44,46 @@ class Cart extends Component {
     this.setState({ total: price });
   };
 
-  onAddAmountItem = (itemId) => {
-    // filter items
-    let selectedIndex = -1;
-    let selected = this.state.products.filter((item, index) => {
-      if (item.id === itemId) {
-        selectedIndex = index;
-        return true;
-      } else {
-        return false;
-      }
-    })[0];
-    if (selected) {
-      selected.stocks += 1;
-      const updatedProducts = this.state.products;
-      updatedProducts[selectedIndex] = selected;
-      this.setState({ products: updatedProducts });
-      this.calculateTotal();
-    } else {
-    }
-  };
-
-  onMinusAmountItem = (itemId) => {
-    // stock -= 1
-  };
-
-  // putIntoCart = () => {
-  //   this.setState({ total: this.state.total + 1 });
+  // onAddAmountItem = (itemId) => {
+  //   // filter items
+  //   let selectedIndex = -1;
+  //   let selected = this.state.products.filter((item, index) => {
+  //     if (item.id === itemId) {
+  //       selectedIndex = index;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   })[0];
+  //   if (selected) {
+  //     selected.stocks += 1;
+  //     const updatedProducts = this.state.products;
+  //     updatedProducts[selectedIndex] = selected;
+  //     this.setState({ products: updatedProducts });
+  //     this.calculateTotal();
+  //   } else {
+  //   }
   // };
 
-  componentDidMount = () => {
-    this.calculateTotal();
-  };
+  // onMinusAmountItem = (itemId) => {
+  //   let selectedIndex = -1;
+  //   let selected = this.state.products.filter((item, index) => {
+  //     if (item.id === itemId) {
+  //       selectedIndex = index;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   })[0];
+  //   if (selected) {
+  //     selected.stocks -= 1;
+  //     const updatedProducts = this.state.products;
+  //     updatedProducts[selectedIndex] = selected;
+  //     this.setState({ products: updatedProducts });
+  //     this.calculateTotal();
+  //   } else {
+  //   }
+  // };
 
   renderListItems = () => {
     return (
@@ -63,7 +94,7 @@ class Cart extends Component {
               item={item}
               key={index}
               onAddAmountItem={this.onAddAmountItem}
-              // putIntoCart={this.putIntoCart}
+              onMinusAmountItem={this.onMinusAmountItem}
             />
           );
         })}
@@ -74,12 +105,15 @@ class Cart extends Component {
   render() {
     return (
       <div className="cart-container">
-        <h4>Giỏ hàng của bạn ({this.state.products.length} sản phẩm)</h4>
-        {/* <button onClick={() => this.putIntoCart()}>Put Into Cart</button> */}
-        <div className="list-item d-flex">
-          <div className="items">{this.renderListItems()}</div>
-          <CartSummary total={this.state.total} />
-        </div>
+        <Header />
+        <div className="mt-3 container">
+          <h4>Giỏ hàng của bạn ({this.state.products.length} sản phẩm)</h4>
+          {/* <button onClick={() => this.putIntoCart()}>Put Into Cart</button> */}
+          <div className="list-item d-flex">
+            <div className="items flex-grow-1">{this.renderListItems()}</div>
+            <CartSummary total={this.state.total} />
+          </div>
+        </div>        
       </div>
     );
   }

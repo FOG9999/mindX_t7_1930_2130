@@ -29,7 +29,7 @@ module.exports = {
          }
          const productList = [];
          const MAX_AMOUNT = 20;
-         // lấy ra toàn bộ các sản phẩm thỏa mãn tìm kiếm
+         // lấy ra toàn bộ các sản phẩm thỏa mãn tìm kiếmt
          productSnapshot.forEach((pro) => {
             let data = pro.data();
             if (searchKey) {
@@ -38,12 +38,28 @@ module.exports = {
                }
             } else productList.push(data);
          });
-         const result = [];
          // phân trang
-         for (let i = page * MAX_AMOUNT; i < (page + 1) * MAX_AMOUNT && i < productList.length; i++) {
-            result.push(productList[i]);
-         }
-         done(result);
+         let endOfPage = ((page + 1) * MAX_AMOUNT) > productList.length ? productList.length : ((page + 1) * MAX_AMOUNT);         
+         done({ result: productList.slice(page * MAX_AMOUNT, endOfPage), total: productList.length });
+      } catch (error) {
+         done({
+            error: true,
+            errorMsg: error.toString(),
+         });
+      }
+   },
+
+   getProductDetail: async (id, done) => {
+      try {
+         // lấy ra toàn bộ các sản phẩm từ firestore
+         const listProductsSnapshot = await db.collection("products").get();
+         const listProducts = [];
+         listProductsSnapshot.forEach((pro) => {
+            listProducts.push(pro.data());
+         });
+         // nesu tìm tháy sản phầm có id thỏa mãn thì trả về cho client, nếu không thì trả về lỗi trong catch
+         const result = listProducts.filter((product) => product.id === id);
+         done(result[0]);
       } catch (error) {
          done({
             error: true,
