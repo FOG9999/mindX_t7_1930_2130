@@ -18,14 +18,15 @@ class Listings extends Component {
       maxValue: 9,
       total: 0,
       loading: false,
-      forwardItemId: null
+      forwardItemId: null,
+      searchCategory: ''
    };
 
    componentDidMount() {
       this.setState({
          loading: true,
       });
-      productService.searchProducts("", "", 0, async (res) => {
+      productService.searchProducts("", this.state.searchCategory, 0, async (res) => {
          if (res.error) {
             notification.error({ message: res.errorMessage });
          } else {
