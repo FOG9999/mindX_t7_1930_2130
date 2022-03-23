@@ -57,7 +57,7 @@ module.exports = {
                     });
                     if(productObj){
                         // pick a color
-                        let selectedColorIndex = Math.floor(Math.random()*productObj.images.length);
+                        let selectedColorIndex = Math.floor(Math.random()*productObj.colors.length);
                         // pick a spec
                         let selectedSpecIndex = Math.floor(Math.random()*productObj.listSpecs.length);
                         batch.update(cartProRef, {

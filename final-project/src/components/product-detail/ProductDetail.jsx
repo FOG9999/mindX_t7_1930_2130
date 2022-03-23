@@ -6,6 +6,7 @@ import './ProductDetail.css';
 import { toast } from 'react-toastify';
 // import * as CONSTANTS from '../../constants'
 import { productService } from '../../apis/ProductService';
+import Header from '../header/Header';
 
 class ProductDetail extends Component {
     state = {
@@ -17,6 +18,7 @@ class ProductDetail extends Component {
         loading: false
     };
 
+    // khi component mới được load l;ên lần đầu
     componentDidMount() {
         this.setState({
             loading: true
@@ -49,7 +51,7 @@ class ProductDetail extends Component {
     renderProductImages = () => {
         return this.state.product.images.map((img, index) => {
             return (
-                <div className="single-img-container col" key={index}>
+                <div className="single-img-container col" key={index} style={{ minWidth: '150px' }}>
                     <Image width={'100%'} height={'100px'} src={img} />
                 </div>
             );
@@ -78,13 +80,14 @@ class ProductDetail extends Component {
                     bordered={true}
                     key={index}
                     onClick={() => this.onSelectColor(index)}
+                    className="my-1"
                 >
                     <div
                         className={
                             this.state.selectedColorIndex === index
                                 ? 'row selected'
                                 : 'row not-selected'
-                        }
+                        } style={{ width: '150px' }}
                     >
                         <div className="col-2 justify-content-center align-items-center">
                             <div
@@ -96,14 +99,18 @@ class ProductDetail extends Component {
                                 }}
                             ></div>
                         </div>
-                        <div className="col">{color}</div>
-                        {this.state.selectedColorIndex === index ? (
-                            <div>
-                                <CheckCircleFilled
-                                    style={{ color: 'green', fontSize: '20px' }}
-                                />
+                        <div className="col row">
+                            <div className="col">
+                                {color}
                             </div>
-                        ) : null}
+                            {this.state.selectedColorIndex === index ? (
+                                <div className='col'>
+                                    <CheckCircleFilled
+                                        style={{ color: 'green', fontSize: '20px' }}
+                                    />
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
                 </Card>
             );
@@ -131,10 +138,11 @@ class ProductDetail extends Component {
     render() {
         return (
             <Spin spinning={this.state.loading} size="default">
+                <Header />
                 {
                     this.state.product ? <div
-                        className="row"
-                        style={{ maxWidth: '1400px', margin: 'auto', padding: '20px' }}
+                        className="row container"
+                        style={{ margin: 'auto', padding: '20px' }}
                     >
                         <div className="col-md-6">
                             <div className="img-container">
@@ -143,7 +151,7 @@ class ProductDetail extends Component {
                                     className="w-100"
                                 ></Image>
                             </div>
-                            <div className="list-img-container row mt-2">
+                            <div className="list-img-container d-flex mt-2" style={{ overflowX: 'scroll' }}>
                                 <Image.PreviewGroup>
                                     {this.renderProductImages()}
                                 </Image.PreviewGroup>
@@ -154,6 +162,11 @@ class ProductDetail extends Component {
                                 {this.state.product.title}
                             </div>
                             <p>{this.state.product.description}</p>
+                            <div className="row">
+                                <div className="col-3"></div>
+                                <div className="col-6 text-center rounded-pill p-3 mb-2 bg-secondary text-white bg-success bg-opacity-50">${this.state.product.price}</div>
+                                <div className="col-3"></div>
+                            </div>
                             <div className="py-2">
                                 <b>Lựa chọn màu: </b>
                             </div>
@@ -165,6 +178,13 @@ class ProductDetail extends Component {
                             </div>
                             <div className="d-flex justify-content-between flex-wrap">
                                 {this.renderProductSpecs()}
+                            </div>
+                            <div className="row">
+                                <div className="col-9 pb-2">
+                                    <div className="justify-content-center border border-dark text-dark bg-white align-items-center rounded-2 h-100 d-flex">Thêm vào giỏ hàng</div>
+                                </div>
+                                <div className="col-3 text-center p-3 mb-2 bg-secondary text-white rounded-2">Mua ngay</div>
+                                {/* Thêm vào đây 2 nút <Thêm vào giỏ hàng> và <Mua ngay> */} 
                             </div>
                         </div>
                     </div> : null

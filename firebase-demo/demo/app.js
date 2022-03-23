@@ -6,7 +6,7 @@ var logger = require("morgan");
 const cors = require("cors");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/users.route");
 
 const { initPassport } = require("./passport");
 const session = require("express-session");
@@ -55,6 +55,7 @@ app.use("/users", usersRouter);
 ////////////////////////// !important
 app.use("/product", productRouter);
 
+// request method: GET, POST, PUT, DELETE: khi muốn lấy ttin -> dùng GET; khi muốn thêm, sửa, xóa ttin -> POST
 app.post("/api/auth/login", passport.authenticate("local", { failureRedirect: "/users/not-found" }), (req, res) => {
    res.send(req.user);
 });

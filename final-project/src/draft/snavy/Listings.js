@@ -7,6 +7,7 @@ import { Card } from "antd";
 import { constants } from "../../constants";
 import Header from "../../components/header/Header";
 import {Navigate} from 'react-router-dom'
+import { userService } from "../../apis/UserService";
 
 class Listings extends Component {
    state = {
@@ -42,6 +43,14 @@ class Listings extends Component {
             this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
          }
       });
+      userService.getProfile( async (res) => {
+         if (res.error) {
+            notification.error({ message: res.errorMessage });
+         } else {
+            let data = await res;
+            console.log(data);
+         }
+      })
    }
 
    onPageChange = (page) => {
@@ -92,7 +101,7 @@ class Listings extends Component {
             <div className="card card-container mt-5">
                <img src={item.images[0]} alt="" className="card-img-top img-fluid" />
                <div className="card-body">
-                  <h5 className="card=title">{item.product}</h5>
+                  <h5 className="card=title">{item.title}</h5>
                   <h5 className="badge rounded-pill bg-danger text-white">{item.price}</h5>
                   <div className="card-body d-flex flex-column info-div">
                      <h6 className="text-wrap fw-lighter">
@@ -102,10 +111,10 @@ class Listings extends Component {
                         <i className="fas fa-mobile-android-alt"></i> {item.screen}
                      </h6>
                      <h6 className="text-wrap fw-lighter">
-                        <i className="fas fa-memory"></i> {item.ram}
+                        <i className="fas fa-memory"></i> còn {item.stocks} cái
                      </h6>
                      <h6 className="text-wrap fw-lighter">
-                        <i className="fas fa-sd-card"></i> {item.storage}
+                        <i className="fas fa-sd-card"></i> {item.type}
                      </h6>
                      <a href={"/"}>
                         {" "}
