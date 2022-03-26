@@ -43,9 +43,9 @@ class Header extends Component {
                     </button>
                 </div>
                 <nav className="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
-                    <a className="navbar-brand" href="/">
+                    <Link className="navbar-brand" to="/home-page">
                         NCT-JSI01
-                    </a>
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -96,14 +96,14 @@ class Header extends Component {
                             </li>
                         </ul>                        
                         <input className="form-control-sm mr-sm-2" value={this.props.searchKey} onChange={this.props.handleChange} onKeyDown={this.props.onEnter} placeholder="Search" aria-label="Search" />                        
-                        <a className="nav-link" href="/my-cart"></a>
+                        <Link className="nav-link mx-1 text-light h5 my-auto" to="/my-cart">Cart</Link>
                     </div>
                     {
                         this.state.loggedIn ? 
                             <div style={{position: "relative"}}>
                                 <img className="imgIcon" src={this.state.userImg} onClick={() => this.toggleMenu()} />
                                 <div style={{display: this.state.displayMenu?'block':'none', position: "absolute", display: "block", zIndex: "1000", backgroundColor: "white", width: "200px", color: "black", cursor: "pointer"}}>
-                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', border: "2px black solid", padding: "10px 25px", borderRadius: "5px"}}>Profile</li>
+                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', border: "2px black solid", padding: "10px 25px", borderRadius: "5px"}}><Link to="/profile">Profile</Link></li>
                                     <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', borderRight: "2px black solid", borderBottom: "2px black solid", borderLeft: "2px black solid", borderImage: "initial", padding: "10px 25px", borderRadius: "5px"}}>Log Out</li>
                                 </div>
                             </div> : <div className="text-end">
