@@ -1,0 +1,31 @@
+* Nội dung:
+1. Giới thiệu các thành viên:
+....
+2. Giới thiệu sản phần:
+2.1. Các chức năng chính:
+- Login
+- Home page: Danh sách sản phẩm, tìm kiếm sản phẩm theo chủng loại, từ khóa, phân trang
+- Profile
+- Chi tiết sản phẩm
+- GIỏ hàng: lấy danh sách các sản phẩm trong giỏ
+2.2. Phân công công việc:
+- Login: Snavy Frontend + Thắng BE
+- Listing: Snavy
+- Header: Đức FE, Hoàng BE, chính sửa trạng thái đăng nhập và dropdown: Tuấn
+- Giỏ hàng: Nhật Minh
+- Profile: Đức FE + Tuấn BE
+- Xây dựng và đẩy data lên firestore: Thắng + Hoàng
+3. Các công nghệ sử dụng
+3.1. Frontend - ReactJS
+- state, props, ant-design
+- routing: Navigate, Link, get search params trên URL
+- viết API lấy data từ BE
+3.2. Backend - Nodejs - Express
+- Luồng xử lý: app.js (app.use(...)) -> các router (folder routes) -> các controllers (thao tác đến DB)
+- Lưu thông tin người dùng đã đang nhập bằng passport, xác minh các request đến BE
+- batch trong firestore
+3.3. firestore
+- Collections, documents
+- Cấu trúc các collections: users, products, cartProducts, carts liên quan với nhau ntn
+3.4. Git - Sourcetree: quản lý version code, tách các tính năng thành các nhánh cho các thành viên phát triển
+4. Demo

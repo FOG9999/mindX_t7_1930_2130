@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 class Header extends Component {
     state = {
         loggedIn: false,
@@ -21,9 +21,9 @@ class Header extends Component {
         this.setState({ displayMenu: !this.state.displayMenu });
     }
 
-    
 
-    
+
+
 
     render() {
         return (
@@ -38,9 +38,9 @@ class Header extends Component {
                     </p>
                     <hr />
                     <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                    {/* <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> */}
                 </div>
                 <nav className="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
                     <Link className="navbar-brand" to="/home-page">
@@ -94,26 +94,26 @@ class Header extends Component {
                                     Bluetooth
                                 </div>
                             </li>
-                        </ul>                        
-                        <input className="form-control-sm mr-sm-2" value={this.props.searchKey} onChange={this.props.handleChange} onKeyDown={this.props.onEnter} placeholder="Search" aria-label="Search" />                        
+                        </ul>
+                        <input className="form-control-sm mr-sm-2" value={this.props.searchKey} onChange={this.props.handleChange} onKeyDown={this.props.onEnter} placeholder="Search" aria-label="Search" />
                         <Link className="nav-link mx-1 text-light h5 my-auto" to="/my-cart">Cart</Link>
                     </div>
                     {
-                        this.state.loggedIn ? 
-                            <div style={{position: "relative"}}>
+                        this.state.loggedIn ?
+                            <div style={{ position: "relative" }}>
                                 <img className="imgIcon" src={this.state.userImg} onClick={() => this.toggleMenu()} />
-                                <div style={{display: this.state.displayMenu?'block':'none', position: "absolute", display: "block", zIndex: "1000", backgroundColor: "white", width: "200px", color: "black", cursor: "pointer"}}>
-                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', border: "2px black solid", padding: "10px 25px", borderRadius: "5px"}}><Link to="/profile">Profile</Link></li>
-                                    <li className="toggle-btn" style={{display: this.state.displayMenu?'block':'none', borderRight: "2px black solid", borderBottom: "2px black solid", borderLeft: "2px black solid", borderImage: "initial", padding: "10px 25px", borderRadius: "5px"}}>Log Out</li>
+                                <div style={{ display: this.state.displayMenu ? 'block' : 'none', position: "absolute", display: "block", zIndex: "1000", backgroundColor: "white", width: "200px", color: "black", cursor: "pointer" }}>
+                                    <li className="toggle-btn" style={{ display: this.state.displayMenu ? 'block' : 'none', border: "2px black solid", padding: "10px 25px", borderRadius: "5px" }}><Link to="/profile">Profile</Link></li>
+                                    <li className="toggle-btn" style={{ display: this.state.displayMenu ? 'block' : 'none', borderRight: "2px black solid", borderBottom: "2px black solid", borderLeft: "2px black solid", borderImage: "initial", padding: "10px 25px", borderRadius: "5px" }}>Log Out</li>
                                 </div>
                             </div> : <div className="text-end">
-                            <button type="button" className="btn btn-outline-light mr-2">
-                                Đăng nhập
-                            </button>
-                            <button type="button" className="btn btn-warning">
-                                Đăng kí
-                            </button>
-                        </div>
+                                <button type="button" className="btn btn-outline-light mr-2">
+                                    Đăng nhập
+                                </button>
+                                <button type="button" className="btn btn-warning">
+                                    Đăng kí
+                                </button>
+                            </div>
                     }
 
                 </nav>
