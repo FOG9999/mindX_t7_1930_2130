@@ -43,14 +43,6 @@ class Listings extends Component {
             this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
          }
       });
-      userService.getProfile( async (res) => {
-         if (res.error) {
-            notification.error({ message: res.errorMessage });
-         } else {
-            let data = await res;
-            console.log(data);
-         }
-      })
    }
 
    onPageChange = (page) => {

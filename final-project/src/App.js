@@ -9,6 +9,7 @@ import Cart from "./components/cart/Cart";
 import "antd/dist/antd.css";
 import ProductDetail from "./components/product-detail/ProductDetail";
 import Listings from "./draft/snavy/Listings";
+import Profile from "./components/profile/Profile";
 
 function App() {
    return (
@@ -18,6 +19,7 @@ function App() {
          <Route path="sign-up" element={<Singup />} />
          <Route path="/my-cart" element={<Cart />} />
          <Route path="/detail" element={<ProductDetail />} />
+         <Route path="/profile" element={<Profile />} />
       </Routes>
    );
 }

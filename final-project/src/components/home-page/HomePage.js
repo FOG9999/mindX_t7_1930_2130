@@ -7,26 +7,26 @@ class HomePage extends Component {
    render() {
       return (
          <div>
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-               <h4 class="alert-heading">
-                  Sale 50%! <span class="badge badge-primary">All New Products</span>{" "}
+            <div className="alert alert-primary alert-dismissible fade show" role="alert">
+               <h4 className="alert-heading">
+                  Sale 50%! <span className="badge badge-primary">All New Products</span>{" "}
                </h4>
                <p>
                   Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of
                   content
                </p>
                <hr />
-               <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <p className="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+               <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <nav class="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
-               <a class="navbar-brand" href="#">
+            <nav className="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
+               <a className="navbar-brand" href="#">
                   fdfdf
                </a>
                <button
-                  class="navbar-toggler"
+                  className="navbar-toggler"
                   type="button"
                   data-toggle="collapse"
                   data-target="#navbarSupportedContent"
@@ -34,88 +34,88 @@ class HomePage extends Component {
                   aria-expanded="false"
                   aria-label="Toggle navigation"
                >
-                  <span class="navbar-toggler-icon"></span>
+                  <span className="navbar-toggler-icon"></span>
                </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav mr-auto">
+                     <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Điện thoại
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a className="dropdown-item" href="#">
                               Action
                            </a>
-                           <a class="dropdown-item" href="#">
+                           <a className="dropdown-item" href="#">
                               Another action
                            </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
+                           <div className="dropdown-divider"></div>
+                           <a className="dropdown-item" href="#">
                               Something else here
                            </a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Máy tính
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a className="dropdown-item" href="#">
                               Action
                            </a>
-                           <a class="dropdown-item" href="#">
+                           <a className="dropdown-item" href="#">
                               Another action
                            </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
+                           <div className="dropdown-divider"></div>
+                           <a className="dropdown-item" href="#">
                               Something else here
                            </a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Phụ kiện điện tử
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a className="dropdown-item" href="#">
                               Action
                            </a>
-                           <a class="dropdown-item" href="#">
+                           <a className="dropdown-item" href="#">
                               Another action
                            </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
+                           <div className="dropdown-divider"></div>
+                           <a className="dropdown-item" href="#">
                               Something else here
                            </a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Máy tính
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a className="dropdown-item" href="#">
                               Action
                            </a>
-                           <a class="dropdown-item" href="#">
+                           <a className="dropdown-item" href="#">
                               Another action
                            </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
+                           <div className="dropdown-divider"></div>
+                           <a className="dropdown-item" href="#">
                               Something else here
                            </a>
                         </div>
                      </li>
                   </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                  <form className="form-inline my-2 my-lg-0">
+                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                   </form>
                </div>
-               <div class="text-end">
-                  <button type="button" class="btn btn-outline-light me-2">
+               <div className="text-end">
+                  <button type="button" className="btn btn-outline-light me-2">
                      Đăng nhập
                   </button>
-                  <button type="button" class="btn btn-warning">
+                  <button type="button" className="btn btn-warning">
                      Đăng kí
                   </button>
                </div>
