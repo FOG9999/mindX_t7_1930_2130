@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 class Header extends Component {
     state = {
         loggedIn: false,
@@ -42,7 +43,7 @@ class Header extends Component {
                     </button>
                 </div>
                 <nav className="navbar navbar-expand-xl navbar navbar-dark bg-dark text-white w-100 p-3">
-                    <a className="navbar-brand" href="#">
+                    <a className="navbar-brand" href="/">
                         NCT-JSI01
                     </a>
                     <button
@@ -95,6 +96,7 @@ class Header extends Component {
                             </li>
                         </ul>                        
                         <input className="form-control-sm mr-sm-2" value={this.props.searchKey} onChange={this.props.handleChange} onKeyDown={this.props.onEnter} placeholder="Search" aria-label="Search" />                        
+                        <a className="nav-link" href="/my-cart"></a>
                     </div>
                     {
                         this.state.loggedIn ? 

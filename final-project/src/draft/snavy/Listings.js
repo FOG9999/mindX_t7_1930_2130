@@ -6,7 +6,7 @@ import { Pagination, Spin } from "antd";
 import { Card } from "antd";
 import { constants } from "../../constants";
 import Header from "../../components/header/Header";
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { userService } from "../../apis/UserService";
 
 class Listings extends Component {
