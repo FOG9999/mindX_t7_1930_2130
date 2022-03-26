@@ -3,12 +3,13 @@ class Header extends Component {
     state = {
         loggedIn: false,
         userImg: "",
-        displayMenu: false
+        displayMenu: false,
+        // searchKey: null
     }
 
     componentDidMount() {
         let object = JSON.parse(localStorage.getItem('userLoggedin'));
-        if (!object.id) {
+        if (!object?.id) {
             this.setState({ loggedIn: false });
         } else {
             this.setState({ loggedIn: true, userImg: object.avatar });
@@ -18,6 +19,10 @@ class Header extends Component {
     toggleMenu = () => {
         this.setState({ displayMenu: !this.state.displayMenu });
     }
+
+    
+
+    
 
     render() {
         return (
@@ -53,78 +58,43 @@ class Header extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li className="nav-item">
+                                <div className="nav-link" id="phone" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
                                     Điện thoại
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
                                 </div>
                             </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Máy tính
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
+                            <li className="nav-item">
+                                <div className="nav-link" id="ipad" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
+                                    Máy tính bảng
                                 </div>
                             </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li className="nav-item">
+                                <div className="nav-link" id="accessory" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
                                     Phụ kiện điện tử
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
                                 </div>
                             </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Máy tính
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
+                            <li className="nav-item">
+                                <div className="nav-link" id="charger" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
+                                    Sạc
                                 </div>
                             </li>
-                        </ul>
-                        <form className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                        </form>
+                            <li className="nav-item">
+                                <div className="nav-link" id="headphone" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
+                                    Tai nghe
+                                </div>
+                            </li>
+                            <li className="nav-item">
+                                <div className="nav-link" id="micro" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
+                                    Microphone
+                                </div>
+                            </li>
+                            <li className="nav-item">
+                                <div className="nav-link" id="bluetooth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onClick}>
+                                    Bluetooth
+                                </div>
+                            </li>
+                        </ul>                        
+                        <input className="form-control-sm mr-sm-2" value={this.props.searchKey} onChange={this.props.handleChange} onKeyDown={this.props.onEnter} placeholder="Search" aria-label="Search" />                        
                     </div>
                     {
                         this.state.loggedIn ? 

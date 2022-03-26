@@ -6,7 +6,7 @@ import { Pagination, Spin } from "antd";
 import { Card } from "antd";
 import { constants } from "../../constants";
 import Header from "../../components/header/Header";
-import {Navigate} from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 import { userService } from "../../apis/UserService";
 
 class Listings extends Component {
@@ -19,14 +19,16 @@ class Listings extends Component {
       maxValue: 9,
       total: 0,
       loading: false,
-      forwardItemId: null
+      forwardItemId: null,
+      searchKey: null,
    };
 
    componentDidMount() {
       this.setState({
          loading: true,
       });
-      productService.searchProducts("", "", 0, async (res) => {
+      let searchKey = new URLSearchParams(window.location.search).get('searchKey');
+      productService.searchProducts(searchKey, "", 0, async (res) => {
          if (res.error) {
             notification.error({ message: res.errorMessage });
          } else {
@@ -42,15 +44,53 @@ class Listings extends Component {
             this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
          }
       });
-      userService.getProfile( async (res) => {
+   }
+
+   onEnter = (e) => {
+      if (e.which === 13) {
+         this.setState({
+            loading: true,
+         });
+         productService.searchProducts(this.state.searchKey, "", 0, async (res) => {
+            if (res.error) {
+               notification.error({ message: res.errorMessage });
+            } else {
+               let data = await res;
+               const displayButton = [];
+               data.result.forEach((values) => {
+                  let images = JSON.parse(values.images)
+                  values.images = images
+               })
+               data.result.forEach((value) => {
+                  displayButton.push("none");
+               });
+               this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
+            }
+         });
+      }
+   }
+
+   onClick = (e) => {
+      this.setState({
+         loading: true
+      });
+      productService.searchProducts("", e.target.id, 0, async (res) => {
          if (res.error) {
             notification.error({ message: res.errorMessage });
          } else {
             let data = await res;
-            console.log(data);
-         }
-      })
-   }
+            const displayButton = [];
+            data.result.forEach((values) => {
+               let images = JSON.parse(values.images)
+               values.images = images
+            })
+            data.result.forEach((value) => {
+               displayButton.push("none");
+            });
+            this.setState({ productBackend: data.result, total: data.total, displayBtns: displayButton, loading: false });
+         };
+      });
+   };
 
    onPageChange = (page) => {
       this.setState({
@@ -93,6 +133,13 @@ class Listings extends Component {
          forwardItemId: itemId
       })
    }
+
+   handleChange = (e) => {
+      let inputValue = e.target.value;
+      this.setState({
+          searchKey: inputValue
+      })
+  }
 
    renderBlock = () => {
       return this.state.productBackend.map((item, index) => (
@@ -137,15 +184,15 @@ class Listings extends Component {
    render() {
       return (
          <Spin spinning={this.state.loading} size="default">
-            <Header />
+            <Header onClick={this.onClick} onEnter={this.onEnter} searchKey={this.state.searchKey} handleChange={this.handleChange}/>
             {
-               this.state.forwardItemId ? <Navigate to={"/detail?id="+this.state.forwardItemId} />: null
+               this.state.forwardItemId ? <Navigate to={"/detail?id=" + this.state.forwardItemId} /> : null
             }
             <div className="container">
-            <div className="row g-4">{this.renderBlock()}</div>
-            <div className="d-flex justify-content-center mt-5 mb-2">
-               <Pagination current={this.state.currentPage} defaultCurrent={1} total={this.state.total} pageSize={constants.PAGE_SIZE} onChange={this.onPageChange} />
-            </div>
+               <div className="row g-4">{this.renderBlock()}</div>
+               <div className="d-flex justify-content-center mt-5 mb-2">
+                  <Pagination current={this.state.currentPage} defaultCurrent={1} total={this.state.total} pageSize={constants.PAGE_SIZE} onChange={this.onPageChange} />
+               </div>
             </div>
          </Spin>
       );

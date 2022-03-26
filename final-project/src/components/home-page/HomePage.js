@@ -5,6 +5,10 @@ import { notification } from "antd";
 class HomePage extends Component {
    state = {};
    render() {
+      function changeData(data) {
+         
+      }
+
       return (
          <div>
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -38,73 +42,25 @@ class HomePage extends Component {
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Điện thoại
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
-                              Action
-                           </a>
-                           <a class="dropdown-item" href="#">
-                              Another action
-                           </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
-                              Something else here
-                           </a>
-                        </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Máy tính
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
-                              Action
-                           </a>
-                           <a class="dropdown-item" href="#">
-                              Another action
-                           </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
-                              Something else here
-                           </a>
-                        </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Phụ kiện điện tử
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
-                              Action
-                           </a>
-                           <a class="dropdown-item" href="#">
-                              Another action
-                           </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
-                              Something else here
-                           </a>
-                        </div>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            Máy tính
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">
-                              Action
-                           </a>
-                           <a class="dropdown-item" href="#">
-                              Another action
-                           </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="#">
-                              Something else here
-                           </a>
-                        </div>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
