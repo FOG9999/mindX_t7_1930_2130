@@ -6,7 +6,7 @@ import { Pagination, Spin } from "antd";
 import { Card } from "antd";
 import { constants } from "../../constants";
 import Header from "../../components/header/Header";
-import { Navigate, Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { userService } from "../../apis/UserService";
 
 class Listings extends Component {
@@ -28,7 +28,8 @@ class Listings extends Component {
          loading: true,
       });
       let searchKey = new URLSearchParams(window.location.search).get('searchKey');
-      productService.searchProducts(searchKey, "", 0, async (res) => {
+      let category = new URLSearchParams(window.location.search).get('category');
+      productService.searchProducts(searchKey === null? '': searchKey, category === null ? "": category, 0, async (res) => {
          if (res.error) {
             notification.error({ message: res.errorMessage });
          } else {
@@ -72,7 +73,8 @@ class Listings extends Component {
 
    onClick = (e) => {
       this.setState({
-         loading: true
+         loading: true,
+         searchKey: ''
       });
       productService.searchProducts("", e.target.id, 0, async (res) => {
          if (res.error) {

@@ -7,6 +7,7 @@ import { userService } from '../../apis/UserService';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from '../header/Header';
 import { parseProduct } from '../../utils/transform';
+import { Spin } from 'antd';
 
 class Cart extends Component {
   constructor() {
@@ -14,11 +15,15 @@ class Cart extends Component {
     this.state = {
       total: 0,
       products: [],
+      loading: false
       // carts: fakeProducts.message.carts,
     };
   }
 
   callCartUser = () => {
+    this.setState({
+      loading: true
+    })
     userService.getCart(async (res) => {
       if (res.error) {
         toast.error(res.errorMessage);
@@ -27,6 +32,7 @@ class Cart extends Component {
         this.setState({
           products: data.userProducts.map(pro => ({...pro, product: parseProduct(pro.product)})),
           total: data.userCart.current_total,
+          loading: false
         });
       }
     });
@@ -104,17 +110,19 @@ class Cart extends Component {
 
   render() {
     return (
+    <Spin spinning={this.state.loading} size="default">
       <div className="cart-container">
-        <Header />
-        <div className="mt-3 container">
+      <Header />
+        {this.state.products.length &&! this.state.loading ? <div className="mt-3 container">
           <h4>Giỏ hàng của bạn ({this.state.products.length} sản phẩm)</h4>
           {/* <button onClick={() => this.putIntoCart()}>Put Into Cart</button> */}
           <div className="list-item d-flex">
             <div className="items flex-grow-1">{this.renderListItems()}</div>
             <CartSummary total={this.state.total} />
           </div>
-        </div>        
-      </div>
+        </div> : null }        
+      </div> 
+      </Spin>
     );
   }
 }
