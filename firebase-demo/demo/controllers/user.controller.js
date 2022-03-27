@@ -39,7 +39,7 @@ module.exports = {
    findUserByid: async (userId, done) => {
       try {
          const userRef = db.collection("users");
-         const foundUser = await userRef.where("id", "==", userId).select("username", "name", "id", "avatar", "created_time", "locked", "phone").get();
+         const foundUser = await userRef.where("id", "==", userId).select("username", "name", "id", "avatar", "created_time", "locked", "phone", "address", "email").get();
          if (foundUser.empty) {
             done(null);
          } else {
